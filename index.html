@@ -1,0 +1,382 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="Elliptic curve standards and parameters.">
+    <meta name="author" content="Ionic Security">
+
+    <!-- origin -->
+    <link rel="canonical" href="index.html">
+      
+    <!-- css -->
+    <link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap4.min.css" integrity="sha384-EkHEUZ6lErauT712zSr0DZ2uuCmi3DoQj6ecNdHQXpMpFNGAQ48WjfXCE5n20W+R" crossorigin="anonymous">
+    
+    <title>Elliptic Curve Standards</title>
+  </head>
+    
+  <body>
+    <div class="container">
+      <h1 class="display-4">Elliptic Curves</h1>
+
+      <!-- navigation tabs -->
+      <ul class="nav nav-tabs" id="myTab" role="tablist">
+        <li class="nav-item">
+          <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" id="curves-tab" data-toggle="tab" href="#curves" role="tab" aria-controls="curves" aria-selected="false">Curves</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" id="standards-tab" data-toggle="tab" href="#standards" role="tab" aria-controls="standards" aria-selected="false">Standards</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" id="security-tab" data-toggle="tab" href="#security" role="tab" aria-controls="security" aria-selected="false">Security</a>
+        </li>
+      </ul>        
+        
+      <!-- content body -->
+      <div class="tab-content" id="myTabContent">
+        
+        <!-- home tab -->
+        <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">...</div>
+
+        <!-- curves tab -->
+        <div class="tab-pane fade" id="curves" role="tabpanel" aria-labelledby="curves-tab">
+          <p></p>
+          <div class="container-fluid">
+              
+            <div class="row">
+              <div class="col-md-3">
+                
+                <!-- curve name datatable -->
+                <table id="curves-table" class="table table-hover table-sm"></table>
+
+              </div>
+              <div class="col-md-9">
+
+                <!-- curve description panel -->
+                <div class="card">
+                    
+                  <!-- curve title -->
+                  <h4 class="card-header">
+                    <span id="curve-name"></span> <small><span id="oid"></span></small>
+                  </h4>
+                    
+                  <!-- curve description -->
+                  <div class="card-body">
+                      
+                    <!-- curve source -->
+                    <table class="table table-borderless table-sm">
+                      <tbody>
+                        <tr>
+                          <th class="text-right" width="50px;">Alias:</th>
+                          <td>none</td>
+                        </tr>
+                        <tr>
+                          <th class="text-right" width="50px;">Standard:</th>
+                          <td><a href="https://www.teletrust.de/fileadmin/files/oid/oid_ECC-Brainpool-Standard-curves-V1.pdf" target="_blank">Brainpool v1.0</a></td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+
+                  <!-- curve panel controls -->
+                  <div class="card-footer">
+                    <div class="btn-toolbar justify-content-between" role="toolbar" aria-label="Toolbar with button groups for more informantion and hex/dec conversion">
+
+                        <!-- more information menu buttons -->
+                        <div class="btn-group" role="group" data-toggle="buttons-checkbox" aria-label="information menu">
+                          <button type="button" data-toggle="collapse" data-target="#curve-params" aria-pressed="true" aria-expanded="true" aria-controls="curve-params" class="btn btn-info btn-small active">Parameters</button>
+                          <button type="button" data-toggle="collapse" data-target="#test-vectors" aria-pressed="false" aria-expanded="false" aria-controls="test-vectors" class="btn btn-info btn-small">Test Vectors</button>
+                        </div>
+                        
+                        <!-- number conversion menu buttons -->
+                        <div class="btn-group" role="group" aria-label="hex/dec toggle">
+                          <button id="hex-toggle" type="button" class="btn btn-primary btn-sm">Hex</label>
+                          <button id="dec-toggle" type="button" class="btn btn-white btn-sm">Dec</label>
+                        </div>
+                    </div>
+                  </div>
+                    
+                </div>
+
+                <!-- curve parameters card -->
+                <div id="curve-params" class="container collapse show">
+                  <div class="card rounded-0 border-top-0">
+                    <div class="card-body">
+                        
+                      <p class="card-text">
+                        <span id="short-weierstrass-prime" data-form="curve">
+                          Short Weierstass curve $$E: \: y^2 \equiv x^3 + A \, x + B \pmod{p}$$
+                        </span>
+                        <span id="edwards-prime" data-form="curve">
+                          Edwards curve $$E: \: x^2 + y^2 \equiv C^2 \left( 1 + D \, x^2 y^2 \right) \pmod{p}$$
+                        </span>
+                        <span id="montgomery-prime" data-form="curve">
+                          Montgomery curve $$E: \: B \, y^2 \equiv x^3 + A \, x^2 + x \pmod{p}$$
+                        </span>
+                          
+                        <span id="prime-field" data-form="curve">over the large-characteristic finite field \(GF(p)\) where \(p\) is a <span id="bit-size-prime"></span>-bit prime number.</span>
+                      </p>
+
+                      <div class="table-responsive">
+                      <table class="table table-borderless table-sm">
+                      <tbody>
+                        <tr>
+                          <th class="text-center" width="50px;"><a href="#" data-toggle="tooltip" data-title="Characteristic of prime field">\(p\)</a></th>
+                          <td class="text-truncate">
+                            <code id="p-hex" data-type="num"></code>
+                            <code id="p-dec" data-type="num" class="d-none"></code>
+                          </td>
+                        </tr>
+                        <tr>
+                          <th class="text-center"><a href="#" data-toggle="tooltip" data-title="Curve coefficient">\(a\)</a></th>
+                          <td class="text-truncate"> 
+                            <code id="a-hex" data-type="num"></code>
+                            <code id="a-dec" data-type="num" class="d-none"></code>
+                          </td>
+                        </tr>
+                        <tr>
+                          <th class="text-center"><a href="#" data-toggle="tooltip" data-title="Curve coefficient">\(b\)</a></th>
+                          <td class="text-truncate">
+                            <code id="b-hex" data-type="num"></code>
+                            <code id="b-dec" data-type="num" class="d-none"></code>
+                          </td>
+                        </tr>
+                        <tr>
+                          <th class="text-center"><a href="#" data-toggle="tooltip" data-title="Basepoint x-coordinate">\(G_x\)</a></th>
+                          <td class="text-truncate">
+                            <code id="x-hex" data-type="num"></code>
+                            <code id="x-dec" data-type="num" class="d-none"></code>
+                          </td>
+                        </tr>
+                        <tr>
+                          <th class="text-center"><a href="#" data-toggle="tooltip" data-title="Basepoint y-coordinate">\(G_y\)</th>
+                          <td class="text-truncate">
+                            <code id="y-hex" data-type="num"></code>
+                            <code id="y-dec" data-type="num" class="d-none"></code>
+                          </td>
+                        </tr>
+                        <tr>
+                          <th class="text-center"><a href="#" data-toggle="tooltip" data-title="Order of basepoint ⟨G⟩">\(q\)</a></th>
+                          <td class="text-truncate">
+                            <code id="q-hex" data-type="num"></code>
+                            <code id="q-dec" data-type="num" class="d-none"></code>
+                          </td>
+                        </tr>
+                        <tr>
+                          <th class="text-center"><a href="#" data-toggle="tooltip" data-title="Cofactor to basepoint order">\(h\)</a></th>
+                          <td class="text-truncate">
+                            <code id="h-hex" data-type="num"></code>
+                            <code id="h-dec" data-type="num" class="d-none"></code>
+                          </td>
+                        </tr>
+                      </tbody>
+                      </table>
+                      </div>
+                        
+                    </div>
+                  </div>
+                </div>
+
+                <!-- test vectors card -->
+                <div id="test-vectors" class="container collapse">
+                  <div class="card rounded-0 border-top-0">
+                    <div class="card-body">
+
+                      <h5 class="card-title">Test Vectors</h5>
+                      <h6 class="card-subtitle">Scalar Multiplication</h6>
+                      <p class="card-text"></p>
+
+                      <div class="table-responsive">
+                        <table class="table">
+                          <thead>
+                            <tr>
+                              <td scope="col" width="50px">\(k\)</td>
+                              <td scope="col" width="35px"></td>
+                              <td scope="col">\(k \, G \)</td>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr>
+                              <td class="align-middle"><code>1</code></td>
+                              <td class="text-right">\(x\)<br>\(y\)</td>
+                              <td class="text-truncate">
+                                <code id="mult-1-x-hex" data-type="num"></code> 
+                                <code id="mult-1-x-dec" data-type="num" class="d-none"></code>
+                                <br>
+                                <code id="mult-1-y-hex" data-type="num"></code> 
+                                <code id="mult-1-y-dec" data-type="num" class="d-none"></code>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td class="align-middle"><code>2</code></td>
+                              <td class="text-right">\(x\)<br>\(y\)</td>
+                              <td class="text-truncate">
+                                <code id="mult-2-x-hex" data-type="num"></code> 
+                                <code id="mult-2-x-dec" data-type="num" class="d-none"></code>
+                                <br>
+                                <code id="mult-2-y-hex" data-type="num"></code> 
+                                <code id="mult-2-y-dec" data-type="num" class="d-none"></code>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td class="align-middle"><code>3</code></td>
+                              <td class="text-right">\(x\)<br>\(y\)</td>
+                              <td class="text-truncate">
+                                <code id="mult-3-x-hex" data-type="num"></code> 
+                                <code id="mult-3-x-dec" data-type="num" class="d-none"></code>
+                                <br>
+                                <code id="mult-3-y-hex" data-type="num"></code> 
+                                <code id="mult-3-y-dec" data-type="num" class="d-none"></code>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td class="align-middle"><code>10</code></td>
+                              <td class="text-right">\(x\)<br>\(y\)</td>
+                              <td class="text-truncate">
+                                <code id="mult-10-x-hex" data-type="num"></code> 
+                                <code id="mult-10-x-dec" data-type="num" class="d-none"></code>
+                                <br>
+                                <code id="mult-10-y-hex" data-type="num"></code> 
+                                <code id="mult-10-y-dec" data-type="num" class="d-none"></code>
+                              </td>
+                            </tr>
+                            <tr class="text-truncate">
+                              <td class="align-middle"><code>100</code></td>
+                              <td class="text-right">\(x\)<br>\(y\)</td>
+                              <td>
+                                <code id="mult-100-x-hex" data-type="num"></code> 
+                                <code id="mult-100-x-dec" data-type="num" class="d-none"></code>
+                                <br>
+                                <code id="mult-100-y-hex" data-type="num"></code> 
+                                <code id="mult-100-y-dec" data-type="num" class="d-none"></code>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+              
+          </div>
+        </div>
+        
+        <!-- standards tab -->
+        <div class="tab-pane fade" id="standards" role="tabpanel" aria-labelledby="standards-tab">
+          <p></p>
+          <div class="container-fluid">
+              
+            <div class="row">
+              <div class="col-md-3">
+                
+                <!-- curve name datatable -->
+                <table id="standards-table" class="table table-hover table-sm"></table>
+
+              </div>
+              <div class="col-md-9">
+
+                <!-- curve description panel -->
+                <div class="card">
+                    
+                  <!-- curve title -->
+                  <h4 class="card-header">
+                    <span id="org-title"></span>
+                  </h4>
+                    
+                  <!-- curve description -->
+                  <div class="card-body">
+                      
+                    <!-- curve source -->
+                    <table class="table table-borderless table-sm">
+                      <tbody>
+                        <tr>
+                          <th class="text-right" width="50px;">Name:</th>
+                          <td colspan="3"><span id="org-name"></span></td>
+                        </tr>
+                        <tr>
+                          <th class="text-right" width="50px;">Type:</th>
+                          <td><span id="org-type"></span></td>
+                          <th class="text-right" width="50px;">Region:</th>
+                          <td><span id="org-region"></span></td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+
+                  <!-- curve panel controls -->
+                  <div class="card-footer">
+                    <div class="btn-toolbar justify-content-between" role="toolbar" aria-label="Toolbar with button groups for more informantion and hex/dec conversion">
+
+                      <!-- more information menu buttons -->
+                      <div class="btn-group" role="group" data-toggle="buttons-checkbox" aria-label="information menu">
+                        <button type="button" data-toggle="collapse" data-target="#org-standards" aria-pressed="true" aria-expanded="true" aria-controls="org-standards" class="btn btn-info btn-small active">Standards</button>
+                        <button type="button" data-toggle="collapse" data-target="#org-curves" aria-pressed="false" aria- expanded="false" aria-controls="org-curves" class="btn btn-info btn-small">Curves</button>
+                      </div>
+
+                    </div>
+                  </div>
+                    
+                </div>
+
+                <!-- org standards card -->
+                <div id="org-standards" class="container collapse show">
+                  <div class="card rounded-0 border-top-0">
+                    <div class="card-body">
+
+                      <table id="standards-docs" class="table table-hover"></table>
+
+                    </div>
+                  </div>
+                </div>
+
+                <!-- org curves card -->
+                <div id="org-curves" class="container collapse">
+                  <div class="card rounded-0 border-top-0">
+                    <div class="card-body">
+
+                    </div>
+                  </div>
+                </div>
+                  
+              </div>
+            </div>
+          </div>
+        </div>
+
+          
+        <!--- security tab --->
+        <div class="tab-pane fade" id="security" role="tabpanel" aria-labelledby="security-tab">
+          <h2>Security</h2>
+          
+        </div>
+      </div>
+        
+    </div>
+
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha384-tsQFqpEReu7ZLhBV2VZlAu7zcOV+rXbYlF2cqB8txI/8aZajjp4Bqd+V6D5IgvKT" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+
+    <!-- datatables -->
+    <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js" integrity="sha384-rgWRqC0OFPisxlUvl332tiM/qmaNxnlY46eksSZD84t+s2vZlqGeHrncwIRX7CGp" crossorigin="anonymous"></script>
+    <script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js" integrity="sha384-uiSTMvD1kcI19sAHJDVf68medP9HA2E2PzGis9Efmfsdb8p9+mvbQNgFhzii1MEX" crossorigin="anonymous"></script>
+
+    <!-- mathjax -->
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML' integrity="sha384-3lJUsx1TJHt7BA4udB5KPnDrlkO8T6J6v/op7ui0BbCjvZ9WqV4Xm6DTP6kQ/iBH" crossorigin="anonymous" async></script>
+
+    <!-- custom site JS -->
+    <script type="text/javascript" src="ecdata.js"></script>
+    <script type="text/javascript" class="init" src="controls.js"></script>
+
+  </body>
+</html>
