@@ -2,10 +2,16 @@ $(document).ready(function() {
   $.when(
     $.getJSON('/curveData.json'),
     $.getJSON('/standardsData.json')
-  ).then( function( cData, sData ) {
-    main( cData[0], sData[0] );
+  )
+  .then( function( cData, sData ) {
+    if ( cData[1] == "success" && sData[1] == "success" ) {
+      main( cData[0], sData[0] );
+    }
+    else{
+      console.error("Request for data failed: " + err)
+    }
   } )
-});
+} );
 
 var main = function ( crvData, stdData ) {
 //-- global events --//
