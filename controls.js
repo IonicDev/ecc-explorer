@@ -1,16 +1,23 @@
+var showError = function(jqxhr, textStatus, error) {
+  console.log(jqxhr)
+  var err = textStatus +", "+ error;
+  console.error("Request for data failed: " + err);
+  //TODO: Display in UI.
+};
+
 $(document).ready(function() {
-  $.getJSON('/standardsData.json')
-      .done(function(data) {
-        main(data);
+  $.getJSON('/curveData.json')
+      .done(function(curveData) {
+        $.getJSON('/standardsData.json')
+            .done(function(standardsData) {
+              main(curveData, standardsData);
+            })
+            .fail(showError)
       })
-      .fail(function(jqxhr, textStatus, error) {
-        var err = textStatus +", "+ error;
-        console.error("Request for curveData failed: " + err);
-        //TODO: Display in UI.
-      })
+      .fail(showError)
 });
 
-var main = function ( crvData ) {
+var main = function ( crvData, stdData ) {
 //-- global events --//
 
   // remove button outline after button click
