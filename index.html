@@ -73,11 +73,11 @@
                       <tbody>
                         <tr>
                           <th class="text-right" width="50px;">Alias:</th>
-                          <td>none</td>
+                          <td><span id="alias"></span></td>
                         </tr>
                         <tr>
                           <th class="text-right" width="50px;">Standard:</th>
-                          <td><a href="https://www.teletrust.de/fileadmin/files/oid/oid_ECC-Brainpool-Standard-curves-V1.pdf" target="_blank">Brainpool v1.0</a></td>
+                          <td><span id="curve-standard"></span></td>
                         </tr>
                       </tbody>
                     </table>
@@ -133,14 +133,14 @@
                           </td>
                         </tr>
                         <tr>
-                          <th class="text-center"><a href="#" data-toggle="tooltip" data-title="Curve coefficient">\(a\)</a></th>
+                          <th class="text-center"><a href="#" data-toggle="tooltip" data-title="Curve coefficient">\(A\)</a></th>
                           <td class="text-truncate"> 
                             <code id="a-hex" data-type="num"></code>
                             <code id="a-dec" data-type="num" class="d-none"></code>
                           </td>
                         </tr>
                         <tr>
-                          <th class="text-center"><a href="#" data-toggle="tooltip" data-title="Curve coefficient">\(b\)</a></th>
+                          <th class="text-center"><a href="#" data-toggle="tooltip" data-title="Curve coefficient">\(B\)</a></th>
                           <td class="text-truncate">
                             <code id="b-hex" data-type="num"></code>
                             <code id="b-dec" data-type="num" class="d-none"></code>
@@ -283,7 +283,7 @@
 
               </div>
               <div class="col-md-9">
-
+                  
                 <!-- curve description panel -->
                 <div class="card">
                     
@@ -294,22 +294,33 @@
                     
                   <!-- curve description -->
                   <div class="card-body">
-                      
-                    <!-- curve source -->
-                    <table class="table table-borderless table-sm">
-                      <tbody>
-                        <tr>
-                          <th class="text-right" width="50px;">Name:</th>
-                          <td colspan="3"><span id="org-name"></span></td>
-                        </tr>
-                        <tr>
-                          <th class="text-right" width="50px;">Type:</th>
-                          <td><span id="org-type"></span></td>
-                          <th class="text-right" width="50px;">Region:</th>
-                          <td><span id="org-region"></span></td>
-                        </tr>
-                      </tbody>
-                    </table>
+
+                    <div class="row">
+                      <div class="col-md-9">
+                          
+                        <!-- curve source -->
+                        <table class="table table-borderless table-sm" width="100%">
+                          <tbody>
+                            <tr>
+                              <th class="text-right" width="50px;">Name:</th>
+                              <td colspan="3"><span id="org-name"></span></td>
+                            </tr>
+                            <tr>
+                              <th class="text-right" width="50px;">Type:</th>
+                              <td><span id="org-type"></span></td>
+                              <th class="text-right" width="50px;">Region:</th>
+                              <td><span id="org-region"></span></td>
+                            </tr>
+                          </tbody>
+                        </table>
+                          
+                      </div>
+                      <div class="col-md-3">
+                        <div class="text-center">
+                          <img id="org-logo" class="img-fluid align-middle" style="max-height: 100px;">
+                        </div>
+                      </div>
+                    </div>
                   </div>
 
                   <!-- curve panel controls -->
@@ -385,7 +396,6 @@
     <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML' integrity="sha384-3lJUsx1TJHt7BA4udB5KPnDrlkO8T6J6v/op7ui0BbCjvZ9WqV4Xm6DTP6kQ/iBH" crossorigin="anonymous" async></script>
 
     <!-- custom site JS -->
-    <script type="text/javascript" src="ecdata.js"></script>
     <script type="text/javascript" class="init" src="controls.js"></script>
 
   </body>
