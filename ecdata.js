@@ -417,7 +417,7 @@ const standardsData = {
         site: "http://protect.gost.ru/document.aspx?control=7&id=180151",
         file: "https://tools.ietf.org/html/rfc4357",
         free: true,
-        year: "2012",
+        year: "2001",
         status: {
           state: "withdrawn",
           successor: {

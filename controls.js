@@ -124,7 +124,7 @@ $(document).ready(function () {
 
 
 //-- 'standards' tab events --//
-  var standardsRows = [];
+  var orgRows = [];
   $.each( standardsData, function (i,e) {
     var region, type, abbr;
     switch (e.org.region) {
@@ -166,11 +166,11 @@ $(document).ready(function () {
     }
     abbr = '<a href="#" data-toggle="tooltip" title="' + e.org.name + '">' + e.org.abbr + '</a>';
 
-    standardsRows.push( [region,type,abbr] );
+    orgRows.push( [region,type,abbr] );
   } );
 
-  var standardsDataTable = $('#standards-table').DataTable( {
-    data: standardsRows,
+  var orgDataTable = $('#org-table').DataTable( {
+    data: orgRows,
     columns: [ 
       { title: 'Region' },
       { title: 'Type' },
@@ -185,22 +185,44 @@ $(document).ready(function () {
   } );
     
   // standards dataTable navigation
-  $('#standards-table tbody').on('click','tr', function ( ) {
+  $('#org-table tbody').on('click','tr', function ( ) {
 
-    var thisOrg = $(this).children('td:last').text();
+    var thisOrg = $(this).children('td:last').text(),
+        std = standardsData[ thisOrg ];
     
-    if ( standardsData[ thisOrg ].org.hasOwnProperty( "alt" ) ) {
-      var thisName = '<a href="' + standardsData[ thisOrg ].org.site + '" target="_blank">'
-            + standardsData[ thisOrg ].org.alt + '</a><br>(' + standardsData[ thisOrg ].org.name + ')';
+    if ( std.org.hasOwnProperty( "alt" ) ) {
+      var thisName = '<a href="' + std.org.site + '" target="_blank">' + std.org.alt + '</a><br>(' + std.org.name + ')';
     }
     else {
-      var thisName = '<a href="' + standardsData[ thisOrg ].org.site + '" target="_blank">' 
-            + standardsData[ thisOrg ].org.name + '</a>';
-    }      
-    $('#org-title').text( standardsData[ thisOrg ].org.abbr );
+      var thisName = '<a href="' + std.org.site + '" target="_blank">' + std.org.name + '</a>';
+    }
+
+    $('#org-title').text( std.org.abbr );
     $('#org-name').html( thisName );
-    $('#org-type').text( standardsData[ thisOrg ].org.type );
-    $('#org-region').text( standardsData[ thisOrg ].org.region );
+    $('#org-type').text( std.org.type );
+    $('#org-region').text( std.org.region );
+    
+    var stdRows = [];
+    $.each( std.standards, function (i,e) { 
+      stdRows.push( [ 
+        '<a href="' + e.site + '">' + e.abbr + '</a>', 
+        '<a href="' + e.file + '">' + e.name + '</a>', 
+        e.year, 
+        e.status.state 
+      ] );
+    } );
+      
+    var stdDocsDataTable = $('#standards-table').DataTable( {
+      destroy: true,
+      data: stdRows,
+      scrollY: 500,
+      scrollCollapse: true,
+      paging: false,
+      searching: false,
+      info: false,
+      order: [[2,'dec']]
+    } );
+
   } );
 
 } );
