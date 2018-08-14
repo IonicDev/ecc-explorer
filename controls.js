@@ -1,4 +1,16 @@
-$(document).ready(function () {
+$(document).ready(function() {
+  $.getJSON('/curveData.json')
+      .done(function(data) {
+        main(data);
+      })
+      .fail(function(jqxhr, textStatus, error) {
+        var err = textStatus +", "+ error;
+        console.error("Request for curveData failed: " + err);
+        //TODO: Display in UI.
+      })
+});
+
+var main = function (curveData) {
 
 //-- global events --//
 
@@ -203,4 +215,4 @@ $(document).ready(function () {
     $('#org-region').text( standardsData[ thisOrg ].org.region );
   } );
 
-} );
+}
