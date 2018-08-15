@@ -1,17 +1,23 @@
 $(document).ready(function() {
-  $.getJSON('/curveData.json')
-      .done(function(data) {
-        main(data);
+  $.when(
+      $.getJSON('/curveData.json'),
+      $.getJSON('/standardsData.json')
+  )
+      .then(function( cData, sData ) {
+        if ( cData[1] == "success" && sData[1] == "success" ) {
+          main( cData[0], sData[0] );
+        }
+        else{
+          throw new Error(cData[1] + "; " + sData[1])
+        }
       })
-      .fail(function(jqxhr, textStatus, error) {
-        var err = textStatus +", "+ error;
-        console.error("Request for curveData failed: " + err);
+      .fail(function(err) {
+        console.error("Request for data failed: " + err);
         //TODO: Display in UI.
       })
 });
 
-var main = function (curveData) {
-
+var main = function ( crvData, stdData ) {
 //-- global events --//
 
   // remove button outline after button click
@@ -24,7 +30,7 @@ var main = function (curveData) {
 //-- 'curves' tab events --//
 
   var curveRows = [];
-  $.each( curveData, function (i) {
+  $.each( crvData, function (i) {
     curveRows.push([i]);
   } );
 
@@ -36,7 +42,7 @@ var main = function (curveData) {
     scrollCollapse: true,
     paging: false,
     searching: false,
-    info: false,
+    info: false
   } );
 
   // fix hidden dataTable header width
@@ -47,71 +53,90 @@ var main = function (curveData) {
   // curves dataTable navigation
   $('#curves-table tbody').on('click','tr', function ( ) {
 
-    var thisCurve = $(this).children('td:first').text(),
-        thisOID = curveData[ thisCurve ].oid,
-        thisField = curveData[ thisCurve ].field
-        thisForm = curveData[ thisCurve ].form;
+    var curveName = $(this).children('td:first').text();      
+    if ( crvData[ curveName ].ref != undefined ) {
+      curveName = crvData[ curveName ].ref;
+    }
 
-    $('#curve-name').text( thisCurve );
-    $('#oid').html( '(<a href="http://oid-info.com/get/' + thisOID + '" target="_blank">' + thisOID + '</a>)' );
+    var curve = crvData[ curveName ],
+        oid = curve.oid,
+        field = curve.field,
+        form = curve.form,
+        standard = curve.standard[0] + ' ' 
+          + stdData[ curve.standard[0] ].standards[ curve.standard[1] ].abbr;
 
-    // display curve description and equation
+    // curve description variables
+    $('#curve-name').text( curveName );
+    $('#oid').html( '(<a href="http://oid-info.com/get/' + oid + '" target="_blank">' + oid + '</a>)' );      
+    if( curve.alias != null ) {
+      $('#alias').text( curve.alias.join(', ') );
+    }
+    else {
+      $('#alias').text( 'none' );
+    }
+    $('#curve-standard').text( standard );
+      
+    // curve equation and parameters
     $('[data-form="curve"]').addClass("d-none");
 
-    if ( thisField == 'prime' ) {
-      $('#bit-size-prime').text( curveData[ thisCurve ].bitsize );
-      switch ( curveData[ thisCurve ].form ) {
+    if ( field == 'prime' || field == 'prime-squared' ) {
+      $('#p-hex').text( curve.params.hex.p );
+      $('#a-hex').text( curve.params.hex.a );
+      $('#b-hex').text( curve.params.hex.b );
+        
+      $('#bit-size-prime').text( curve.bitsize );
+        
+      switch ( form ) {
         case 'short-weierstrass':
           $('#short-weierstrass-prime').toggleClass("d-none");
           break;
         case 'edwards':
           $('#edwards-prime').toggleClass("d-none");
+          $('#a-hex').text( curve.params.hex.a );
           break;
         case 'montgomery':
           $('#montgomery-prime').toggleClass("d-none");          
+          $('#a-hex').text( curve.params.hex.a );
       }
       $('#prime-field').toggleClass("d-none");
     }
     else if ( thisField == 'trinomial' ) { }
     else if ( thisField == 'pentanomial' ) { }
 
-    $('#p-hex').text( curveData[ thisCurve ].params.hex.p );
-    $('#a-hex').text( curveData[ thisCurve ].params.hex.a );
-    $('#b-hex').text( curveData[ thisCurve ].params.hex.b );
-    $('#x-hex').text( curveData[ thisCurve ].params.hex.x );
-    $('#y-hex').text( curveData[ thisCurve ].params.hex.y );
-    $('#q-hex').text( curveData[ thisCurve ].params.hex.q );
-    $('#h-hex').text( curveData[ thisCurve ].params.hex.h );
+    $('#x-hex').text( curve.params.hex.x );
+    $('#y-hex').text( curve.params.hex.y );
+    $('#q-hex').text( curve.params.hex.q );
+    $('#h-hex').text( curve.params.hex.h );
 
-    $('#mult-1-x-hex').text( curveData[ thisCurve ].testvec.mult.hex[ '1' ].x );
-    $('#mult-1-y-hex').text( curveData[ thisCurve ].testvec.mult.hex[ '1' ].y );
-    $('#mult-2-x-hex').text( curveData[ thisCurve ].testvec.mult.hex[ '2' ].x );
-    $('#mult-2-y-hex').text( curveData[ thisCurve ].testvec.mult.hex[ '2' ].y );
-    $('#mult-3-x-hex').text( curveData[ thisCurve ].testvec.mult.hex[ '3' ].x );
-    $('#mult-3-y-hex').text( curveData[ thisCurve ].testvec.mult.hex[ '3' ].y );
-    $('#mult-10-x-hex').text( curveData[ thisCurve ].testvec.mult.hex[ '10' ].x );
-    $('#mult-10-y-hex').text( curveData[ thisCurve ].testvec.mult.hex[ '10' ].y );
-    $('#mult-100-x-hex').text( curveData[ thisCurve ].testvec.mult.hex[ '100' ].x );
-    $('#mult-100-y-hex').text( curveData[ thisCurve ].testvec.mult.hex[ '100' ].y );
+    $('#mult-1-x-hex').text( curve.testvec.mult.hex[ '1' ].x );
+    $('#mult-1-y-hex').text( curve.testvec.mult.hex[ '1' ].y );
+    $('#mult-2-x-hex').text( curve.testvec.mult.hex[ '2' ].x );
+    $('#mult-2-y-hex').text( curve.testvec.mult.hex[ '2' ].y );
+    $('#mult-3-x-hex').text( curve.testvec.mult.hex[ '3' ].x );
+    $('#mult-3-y-hex').text( curve.testvec.mult.hex[ '3' ].y );
+    $('#mult-10-x-hex').text( curve.testvec.mult.hex[ '10' ].x );
+    $('#mult-10-y-hex').text( curve.testvec.mult.hex[ '10' ].y );
+    $('#mult-100-x-hex').text( curve.testvec.mult.hex[ '100' ].x );
+    $('#mult-100-y-hex').text( curve.testvec.mult.hex[ '100' ].y );
 
-    $('#p-dec').text( curveData[ thisCurve ].params.dec.p );
-    $('#a-dec').text( curveData[ thisCurve ].params.dec.a );
-    $('#b-dec').text( curveData[ thisCurve ].params.dec.b );
-    $('#x-dec').text( curveData[ thisCurve ].params.dec.x );
-    $('#y-dec').text( curveData[ thisCurve ].params.dec.y );
-    $('#q-dec').text( curveData[ thisCurve ].params.dec.q );
-    $('#h-dec').text( curveData[ thisCurve ].params.dec.h );
+    $('#p-dec').text( curve.params.dec.p );
+    $('#a-dec').text( curve.params.dec.a );
+    $('#b-dec').text( curve.params.dec.b );
+    $('#x-dec').text( curve.params.dec.x );
+    $('#y-dec').text( curve.params.dec.y );
+    $('#q-dec').text( curve.params.dec.q );
+    $('#h-dec').text( curve.params.dec.h );
 
-    $('#mult-1-x-dec').text( curveData[ thisCurve ].testvec.mult.dec[ '1' ].x );
-    $('#mult-1-y-dec').text( curveData[ thisCurve ].testvec.mult.dec[ '1' ].y );
-    $('#mult-2-x-dec').text( curveData[ thisCurve ].testvec.mult.dec[ '2' ].x );
-    $('#mult-2-y-dec').text( curveData[ thisCurve ].testvec.mult.dec[ '2' ].y );
-    $('#mult-3-x-dec').text( curveData[ thisCurve ].testvec.mult.dec[ '3' ].x );
-    $('#mult-3-y-dec').text( curveData[ thisCurve ].testvec.mult.dec[ '3' ].y );
-    $('#mult-10-x-dec').text( curveData[ thisCurve ].testvec.mult.dec[ '10' ].x );
-    $('#mult-10-y-dec').text( curveData[ thisCurve ].testvec.mult.dec[ '10' ].y );
-    $('#mult-100-x-dec').text( curveData[ thisCurve ].testvec.mult.dec[ '100' ].x );
-    $('#mult-100-y-dec').text( curveData[ thisCurve ].testvec.mult.dec[ '100' ].y );
+    $('#mult-1-x-dec').text( curve.testvec.mult.dec[ '1' ].x );
+    $('#mult-1-y-dec').text( curve.testvec.mult.dec[ '1' ].y );
+    $('#mult-2-x-dec').text( curve.testvec.mult.dec[ '2' ].x );
+    $('#mult-2-y-dec').text( curve.testvec.mult.dec[ '2' ].y );
+    $('#mult-3-x-dec').text( curve.testvec.mult.dec[ '3' ].x );
+    $('#mult-3-y-dec').text( curve.testvec.mult.dec[ '3' ].y );
+    $('#mult-10-x-dec').text( curve.testvec.mult.dec[ '10' ].x );
+    $('#mult-10-y-dec').text( curve.testvec.mult.dec[ '10' ].y );
+    $('#mult-100-x-dec').text( curve.testvec.mult.dec[ '100' ].x );
+    $('#mult-100-y-dec').text( curve.testvec.mult.dec[ '100' ].y );
 
     $('#curves-table tbody tr').removeClass("table-active");
     $(this).addClass("table-active");
@@ -136,8 +161,8 @@ var main = function (curveData) {
 
 
 //-- 'standards' tab events --//
-  var standardsRows = [];
-  $.each( standardsData, function (i,e) {
+  var orgRows = [];
+  $.each( stdData, function (i,e) {
     var region, type, abbr;
     switch (e.org.region) {
         case "USA":
@@ -156,7 +181,7 @@ var main = function (curveData) {
             region = '<span class="d-inline-block" data-toggle="tooltip" title="Russia">🇷🇺</span>';
             break;
         case "International":
-            region = '<span class="d-inline-block" data-toggle="tooltip" title="International">🌍</span>';
+            region = '<span class="d-inline-block" data-toggle="tooltip" title="International">🌐</span>';
             break;
         default:
             region = "";
@@ -178,11 +203,11 @@ var main = function (curveData) {
     }
     abbr = '<a href="#" data-toggle="tooltip" title="' + e.org.name + '">' + e.org.abbr + '</a>';
 
-    standardsRows.push( [region,type,abbr] );
+    orgRows.push( [region,type,abbr] );
   } );
 
-  var standardsDataTable = $('#standards-table').DataTable( {
-    data: standardsRows,
+  var orgDataTable = $('#org-table').DataTable( {
+    data: orgRows,
     columns: [ 
       { title: 'Region' },
       { title: 'Type' },
@@ -197,22 +222,45 @@ var main = function (curveData) {
   } );
     
   // standards dataTable navigation
-  $('#standards-table tbody').on('click','tr', function ( ) {
+  $('#org-table tbody').on('click','tr', function ( ) {
 
-    var thisOrg = $(this).children('td:last').text();
+    var thisOrg = $(this).children('td:last').text(),
+        std = stdData[ thisOrg ];
     
-    if ( standardsData[ thisOrg ].org.hasOwnProperty( "alt" ) ) {
-      var thisName = '<a href="' + standardsData[ thisOrg ].org.site + '" target="_blank">'
-            + standardsData[ thisOrg ].org.alt + '</a><br>(' + standardsData[ thisOrg ].org.name + ')';
+    if ( std.org.hasOwnProperty( "alt" ) ) {
+      var thisName = '<a href="' + std.org.site + '" target="_blank">' + std.org.alt + '</a><br>(' + std.org.name + ')';
     }
     else {
-      var thisName = '<a href="' + standardsData[ thisOrg ].org.site + '" target="_blank">' 
-            + standardsData[ thisOrg ].org.name + '</a>';
-    }      
-    $('#org-title').text( standardsData[ thisOrg ].org.abbr );
+      var thisName = '<a href="' + std.org.site + '" target="_blank">' + std.org.name + '</a>';
+    }
+
+    $('#org-title').text( std.org.abbr );
     $('#org-name').html( thisName );
-    $('#org-type').text( standardsData[ thisOrg ].org.type );
-    $('#org-region').text( standardsData[ thisOrg ].org.region );
+    $('#org-type').text( std.org.type );
+    $('#org-region').text( std.org.region );
+    $('#org-logo').attr( "src", std.org.logo );
+    
+    var stdRows = [];
+    $.each( std.standards, function (i,e) { 
+      stdRows.push( [ 
+        '<a href="' + e.site + '" target="_blank">' + e.abbr + '</a>', 
+        '<a href="' + e.file + '" target="_blank">' + e.name + '</a>', 
+        e.year, 
+        e.status.state 
+      ] );
+    } );
+      
+    var stdDocsDataTable = $('#standards-table').DataTable( {
+      destroy: true,
+      data: stdRows,
+      scrollY: 500,
+      scrollCollapse: true,
+      paging: false,
+      searching: false,
+      info: false,
+      order: [[2,'dec']]
+    } );
+
   } );
 
 }
