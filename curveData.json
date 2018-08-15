@@ -167,7 +167,10 @@
       "nistP256"
     ],
     "oid": "1.2.840.10045.3.1.7",
-    "standard": "fips186",
+    "standard": [
+      "NIST", 
+      "FIPS186-4"
+    ],
     "generated": "random",
     "form": "short-weierstrass",
     "field": "prime",

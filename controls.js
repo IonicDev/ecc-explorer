@@ -3,12 +3,15 @@ $(document).ready(function() {
     $.getJSON('/curveData.json'),
     $.getJSON('/standardsData.json')
   )
-  .then( function( cData, sData ) {
-    main( cData[0], sData[0] );
+  .then(function( cData, sData ) {
+    if ( cData[1] == "success" && sData[1] == "success" ) {
+      main( cData[0], sData[0] );
+    }
+    else{
+      throw new Error(cData[1] + "; " + sData[1])
+    }
   })
-  .fail(function(jqxhr, textStatus, error) {
-    console.log(jqxhr)
-    var err = textStatus +", "+ error;
+  .fail(function(err) {
     console.error("Request for data failed: " + err);
     //TODO: Display in UI.
   })
@@ -163,22 +166,22 @@ var main = function ( crvData, stdData ) {
     var region, type, abbr;
     switch (e.org.region) {
         case "USA":
-            region = '<span class="d-inline-block" data-toggle="tooltip" title="USA">ðŸ‡ºðŸ‡¸</span>';
+            region = '<span class="d-inline-block" data-toggle="tooltip" title="USA">🇺🇸</span>';
             break;
         case "France":
-            region = '<span class="d-inline-block" data-toggle="tooltip" title="France">ðŸ‡«ðŸ‡·</span>';
+            region = '<span class="d-inline-block" data-toggle="tooltip" title="France">🇫🇷</span>';
             break;
         case "Germany":
-            region = '<span class="d-inline-block" data-toggle="tooltip" title="Germany">ðŸ‡©ðŸ‡ª</span>';
+            region = '<span class="d-inline-block" data-toggle="tooltip" title="Germany">🇩🇪</span>';
             break;
         case "China":
-            region = '<span class="d-inline-block" data-toggle="tooltip" title="China">ðŸ‡¨ðŸ‡³</span>';
+            region = '<span class="d-inline-block" data-toggle="tooltip" title="China">🇨🇳</span>';
             break;
         case "Russia":
-            region = '<span class="d-inline-block" data-toggle="tooltip" title="Russia">ðŸ‡·ðŸ‡º</span>';
+            region = '<span class="d-inline-block" data-toggle="tooltip" title="Russia">🇷🇺</span>';
             break;
         case "International":
-            region = '<span class="d-inline-block" data-toggle="tooltip" title="International">ðŸŒ�</span>';
+            region = '<span class="d-inline-block" data-toggle="tooltip" title="International">🌐</span>';
             break;
         default:
             region = "";
@@ -186,13 +189,13 @@ var main = function ( crvData, stdData ) {
     }
     switch (e.org.type) {
         case "Government":
-            type = '<span class="d-inline-block" data-toggle="tooltip" title="Government">ðŸ�›</span>';
+            type = '<span class="d-inline-block" data-toggle="tooltip" title="Government">🏛</span>';
             break;
         case "Industry":
-            type = '<span class="d-inline-block" data-toggle="tooltip" title="Industry">ðŸ�¢</span>';
+            type = '<span class="d-inline-block" data-toggle="tooltip" title="Industry">🏢</span>';
             break;
         case "Academia":
-            type = '<span class="d-inline-block" data-toggle="tooltip" title="Academia">ðŸ�«</span>';
+            type = '<span class="d-inline-block" data-toggle="tooltip" title="Academia">🏫</span>';
             break;
         default:
             type = "";
