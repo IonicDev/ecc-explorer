@@ -1,20 +1,20 @@
 $(document).ready(function() {
   $.when(
-    $.getJSON('/curveData.json'),
-    $.getJSON('/standardsData.json')
+      $.getJSON('/curveData.json'),
+      $.getJSON('/standardsData.json')
   )
-  .then(function( cData, sData ) {
-    if ( cData[1] == "success" && sData[1] == "success" ) {
-      main( cData[0], sData[0] );
-    }
-    else{
-      throw new Error(cData[1] + "; " + sData[1])
-    }
-  })
-  .fail(function(err) {
-    console.error("Request for data failed: " + err);
-    //TODO: Display in UI.
-  })
+      .then(function( cData, sData ) {
+        if ( cData[1] == "success" && sData[1] == "success" ) {
+          main( cData[0], sData[0] );
+        }
+        else{
+          throw new Error(cData[1] + "; " + sData[1])
+        }
+      })
+      .fail(function(err) {
+        console.error("Request for data failed: " + err);
+        //TODO: Display in UI.
+      })
 });
 
 var main = function ( crvData, stdData ) {
@@ -42,7 +42,7 @@ var main = function ( crvData, stdData ) {
     scrollCollapse: true,
     paging: false,
     searching: false,
-    info: false,
+    info: false
   } );
 
   // fix hidden dataTable header width
@@ -62,8 +62,16 @@ var main = function ( crvData, stdData ) {
         oid = curve.oid,
         field = curve.field,
         form = curve.form,
-        standard = curve.standard[0] + ' ' 
-          + stdData[ curve.standard[0] ].standards[ curve.standard[1] ].abbr;
+        standard = [];
+    if (typeof curve.standard !== 'object') {
+      //TODO: Improve checking to ensure array of objects
+      console.error("Curve standard not defined as expected:", curve.standard);
+    } else {
+      curve.standard.forEach(function (singleStandard) {
+        standard.push(singleStandard.org + ' ' + singleStandard.std);
+        //TODO: Go to stdData[ curve.standard[0] ].standards[ curve.standard[1] ].abbr potentially.
+      });
+    }
 
     // curve description variables
     $('#curve-name').text( curveName );
@@ -74,7 +82,7 @@ var main = function ( crvData, stdData ) {
     else {
       $('#alias').text( 'none' );
     }
-    $('#curve-standard').text( standard );
+    $('#curve-standard').text( standard.join('; ') );
       
     // curve equation and parameters
     $('[data-form="curve"]').addClass("d-none");
@@ -92,32 +100,25 @@ var main = function ( crvData, stdData ) {
           break;
         case 'edwards':
           $('#edwards-prime').toggleClass("d-none");
-          $('#a-hex').text( curve.params.hex.a );
+          $('#a-hex').text( curve.params.hex.a ); //TODO: Duplicated??
           break;
         case 'montgomery':
           $('#montgomery-prime').toggleClass("d-none");          
-          $('#a-hex').text( curve.params.hex.a );
+          $('#a-hex').text( curve.params.hex.a ); //TODO: Duplicated??
       }
       $('#prime-field').toggleClass("d-none");
     }
-    else if ( thisField == 'trinomial' ) { }
-    else if ( thisField == 'pentanomial' ) { }
+    else if ( field == 'trinomial' ) {
+      console.warn("Trinomial curve not rendered.");
+    }
+    else if ( field == 'pentanomial' ) {
+      console.warn("Pentanomial curve not rendered.");
+    }
 
     $('#x-hex').text( curve.params.hex.x );
     $('#y-hex').text( curve.params.hex.y );
     $('#q-hex').text( curve.params.hex.q );
     $('#h-hex').text( curve.params.hex.h );
-
-    $('#mult-1-x-hex').text( curve.testvec.mult.hex[ '1' ].x );
-    $('#mult-1-y-hex').text( curve.testvec.mult.hex[ '1' ].y );
-    $('#mult-2-x-hex').text( curve.testvec.mult.hex[ '2' ].x );
-    $('#mult-2-y-hex').text( curve.testvec.mult.hex[ '2' ].y );
-    $('#mult-3-x-hex').text( curve.testvec.mult.hex[ '3' ].x );
-    $('#mult-3-y-hex').text( curve.testvec.mult.hex[ '3' ].y );
-    $('#mult-10-x-hex').text( curve.testvec.mult.hex[ '10' ].x );
-    $('#mult-10-y-hex').text( curve.testvec.mult.hex[ '10' ].y );
-    $('#mult-100-x-hex').text( curve.testvec.mult.hex[ '100' ].x );
-    $('#mult-100-y-hex').text( curve.testvec.mult.hex[ '100' ].y );
 
     $('#p-dec').text( curve.params.dec.p );
     $('#a-dec').text( curve.params.dec.a );
@@ -127,16 +128,28 @@ var main = function ( crvData, stdData ) {
     $('#q-dec').text( curve.params.dec.q );
     $('#h-dec').text( curve.params.dec.h );
 
-    $('#mult-1-x-dec').text( curve.testvec.mult.dec[ '1' ].x );
-    $('#mult-1-y-dec').text( curve.testvec.mult.dec[ '1' ].y );
-    $('#mult-2-x-dec').text( curve.testvec.mult.dec[ '2' ].x );
-    $('#mult-2-y-dec').text( curve.testvec.mult.dec[ '2' ].y );
-    $('#mult-3-x-dec').text( curve.testvec.mult.dec[ '3' ].x );
-    $('#mult-3-y-dec').text( curve.testvec.mult.dec[ '3' ].y );
-    $('#mult-10-x-dec').text( curve.testvec.mult.dec[ '10' ].x );
-    $('#mult-10-y-dec').text( curve.testvec.mult.dec[ '10' ].y );
-    $('#mult-100-x-dec').text( curve.testvec.mult.dec[ '100' ].x );
-    $('#mult-100-y-dec').text( curve.testvec.mult.dec[ '100' ].y );
+    // Reset all values in case where you are switching to doesn't have them defined:
+    const permittedTestVecValues = ['1', '2', '3', '10', '100'];
+    permittedTestVecValues.forEach(function(key) {
+      $('#mult-'+key+'-x-hex').text( '' );
+      $('#mult-'+key+'-y-hex').text( '' );
+      $('#mult-'+key+'-x-dec').text( '' );
+      $('#mult-'+key+'-y-dec').text( '' );
+    });
+
+    Object.keys(curve.testvec.mult.hex).forEach(function(hexKey) {
+      //console.log('#mult-'+hexKey+'-y-hex', $('#mult-'+hexKey+'-y-hex'));
+      var point = curve.testvec.mult.hex[hexKey];
+      $('#mult-'+hexKey+'-x-hex').text( point.x );
+      $('#mult-'+hexKey+'-y-hex').text( point.y );
+    });
+
+    Object.keys(curve.testvec.mult.dec).forEach(function(decKey) {
+      //console.log('#mult-'+decKey+'-y-hex', $('#mult-'+decKey+'-y-hex'));
+      var point = curve.testvec.mult.dec[decKey];
+      $('#mult-'+decKey+'-x-dec').text( point.x );
+      $('#mult-'+decKey+'-y-dec').text( point.y );
+    });
 
     $('#curves-table tbody tr').removeClass("table-active");
     $(this).addClass("table-active");
