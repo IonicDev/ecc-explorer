@@ -3,15 +3,19 @@ $(document).ready(function() {
     $.getJSON('/curveData.json'),
     $.getJSON('/standardsData.json')
   )
-  .then( function( cData, sData ) {
+  .then(function( cData, sData ) {
     if ( cData[1] == "success" && sData[1] == "success" ) {
       main( cData[0], sData[0] );
     }
     else{
-      console.error("Request for data failed: " + err)
+      throw new Error(cData[1] + "; " + sData[1])
     }
-  } )
-} );
+  })
+  .fail(function(err) {
+    console.error("Request for data failed: " + err);
+    //TODO: Display in UI.
+  })
+});
 
 var main = function ( crvData, stdData ) {
 //-- global events --//
