@@ -2,14 +2,17 @@
 <html lang="en">
   <head>
     <!-- required meta tags -->
-    <meta charset="utf-8">
+    <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="Elliptic curve standards and parameters.">
     <meta name="author" content="Ionic Security">
+    <meta name="theme-color" content="#007bff">
 
     <!-- origin -->
     <link rel="canonical" href="index.html">
-      
+    <link rel="alternate" hreflang="en" href="https://example.com">
+    <link rel="shortcut icon" type="image/png" href="data:image/png;base64,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">
+
     <!-- css -->
     <link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap4.min.css" integrity="sha384-EkHEUZ6lErauT712zSr0DZ2uuCmi3DoQj6ecNdHQXpMpFNGAQ48WjfXCE5n20W+R" crossorigin="anonymous">
@@ -73,11 +76,11 @@
                       <tbody>
                         <tr>
                           <th class="text-right" width="50px;">Alias:</th>
-                          <td>none</td>
+                          <td><span id="alias"></span></td>
                         </tr>
                         <tr>
                           <th class="text-right" width="50px;">Standard:</th>
-                          <td><a href="https://www.teletrust.de/fileadmin/files/oid/oid_ECC-Brainpool-Standard-curves-V1.pdf" target="_blank">Brainpool v1.0</a></td>
+                          <td><span id="curve-standard"></span></td>
                         </tr>
                       </tbody>
                     </table>
@@ -133,14 +136,14 @@
                           </td>
                         </tr>
                         <tr>
-                          <th class="text-center"><a href="#" data-toggle="tooltip" data-title="Curve coefficient">\(a\)</a></th>
+                          <th class="text-center"><a href="#" data-toggle="tooltip" data-title="Curve coefficient">\(A\)</a></th>
                           <td class="text-truncate"> 
                             <code id="a-hex" data-type="num"></code>
                             <code id="a-dec" data-type="num" class="d-none"></code>
                           </td>
                         </tr>
                         <tr>
-                          <th class="text-center"><a href="#" data-toggle="tooltip" data-title="Curve coefficient">\(b\)</a></th>
+                          <th class="text-center"><a href="#" data-toggle="tooltip" data-title="Curve coefficient">\(B\)</a></th>
                           <td class="text-truncate">
                             <code id="b-hex" data-type="num"></code>
                             <code id="b-dec" data-type="num" class="d-none"></code>
@@ -283,7 +286,7 @@
 
               </div>
               <div class="col-md-9">
-
+                  
                 <!-- curve description panel -->
                 <div class="card">
                     
@@ -294,22 +297,33 @@
                     
                   <!-- curve description -->
                   <div class="card-body">
-                      
-                    <!-- curve source -->
-                    <table class="table table-borderless table-sm">
-                      <tbody>
-                        <tr>
-                          <th class="text-right" width="50px;">Name:</th>
-                          <td colspan="3"><span id="org-name"></span></td>
-                        </tr>
-                        <tr>
-                          <th class="text-right" width="50px;">Type:</th>
-                          <td><span id="org-type"></span></td>
-                          <th class="text-right" width="50px;">Region:</th>
-                          <td><span id="org-region"></span></td>
-                        </tr>
-                      </tbody>
-                    </table>
+
+                    <div class="row">
+                      <div class="col-md-9">
+                          
+                        <!-- curve source -->
+                        <table class="table table-borderless table-sm" width="100%">
+                          <tbody>
+                            <tr>
+                              <th class="text-right" width="50px;">Name:</th>
+                              <td colspan="3"><span id="org-name"></span></td>
+                            </tr>
+                            <tr>
+                              <th class="text-right" width="50px;">Type:</th>
+                              <td><span id="org-type"></span></td>
+                              <th class="text-right" width="50px;">Region:</th>
+                              <td><span id="org-region"></span></td>
+                            </tr>
+                          </tbody>
+                        </table>
+                          
+                      </div>
+                      <div class="col-md-3">
+                        <div class="text-center">
+                          <img id="org-logo" class="img-fluid align-middle" style="max-height: 100px;">
+                        </div>
+                      </div>
+                    </div>
                   </div>
 
                   <!-- curve panel controls -->
@@ -382,10 +396,9 @@
     <script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js" integrity="sha384-uiSTMvD1kcI19sAHJDVf68medP9HA2E2PzGis9Efmfsdb8p9+mvbQNgFhzii1MEX" crossorigin="anonymous"></script>
 
     <!-- mathjax -->
-    <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML' integrity="sha384-3lJUsx1TJHt7BA4udB5KPnDrlkO8T6J6v/op7ui0BbCjvZ9WqV4Xm6DTP6kQ/iBH" crossorigin="anonymous" async></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML" integrity="sha384-3lJUsx1TJHt7BA4udB5KPnDrlkO8T6J6v/op7ui0BbCjvZ9WqV4Xm6DTP6kQ/iBH" crossorigin="anonymous" async></script>
 
     <!-- custom site JS -->
-    <script type="text/javascript" src="ecdata.js"></script>
     <script type="text/javascript" class="init" src="controls.js"></script>
 
   </body>
