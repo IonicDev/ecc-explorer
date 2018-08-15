@@ -16,7 +16,22 @@
     <!-- css -->
     <link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap4.min.css" integrity="sha384-EkHEUZ6lErauT712zSr0DZ2uuCmi3DoQj6ecNdHQXpMpFNGAQ48WjfXCE5n20W+R" crossorigin="anonymous">
-    
+    <style>
+      main {
+        margin-bottom: 50px; /* Margin bottom by footer height */
+      }
+      .footer {
+        position: relative;
+        bottom: 0;
+        width: 100%;
+        height: 50px; /* Set the fixed height of the footer here */
+        background-color: #f5f5f5;
+        padding: 5px;
+      }
+      .footer div {
+        font-size: 0.5em;
+      }
+    </style>
     <title>Elliptic Curves</title>
   </head>
     
@@ -41,7 +56,7 @@
       </ul>        
         
       <!-- content body -->
-      <div class="tab-content" id="myTabContent">
+      <main class="tab-content container" id="myTabContent">
         
         <!-- home tab -->
         <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
@@ -417,13 +432,24 @@
 
           
         <!--- security tab --->
+        <!--
         <div class="tab-pane fade" id="security" role="tabpanel" aria-labelledby="security-tab">
           <h2>Security</h2>
           
         </div>
-      </div>
-        
+        -->
+      </main>
+
+      <footer class="footer">
+        <div class="text-muted">
+          You acknowledge your access, review and use of the documentation on this page is subject to the Ionic Security Inc. <a href="https://dev.ionic.com/use">Documentation Use Rights.</a>
+          <br>
+          Copyright 2018 Ionic Security Inc. All rights reserved. Ionic Security®, In Math We Trust™, and IONIC™ are trademarks and registered trademarks of Ionic Security Inc. in the United States and certain other countries. All trademarks, tradenames, or product names of other companies or organizations belong to their respective owners.  | <a href="https://www.ionic.com/privacy-notice/">PRIVACY NOTICE</a> |
+        </div>
+      </footer>
+
     </div>
+
 
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha384-tsQFqpEReu7ZLhBV2VZlAu7zcOV+rXbYlF2cqB8txI/8aZajjp4Bqd+V6D5IgvKT" crossorigin="anonymous"></script>
