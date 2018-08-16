@@ -38,7 +38,7 @@ var main = function ( crvData, stdData ) {
   var curvesDataTable = $('#curves-table').DataTable( {
     data: curveRows,
     columns: [ { title: 'Curve Name' } ],
-    scrollY: 500,
+    scrollY: "90vh",
     scrollCollapse: true,
     paging: false,
     searching: false,
@@ -62,15 +62,12 @@ var main = function ( crvData, stdData ) {
         oid = curve.oid,
         field = curve.field,
         form = curve.form,
-        standard = [];
-    if (typeof curve.standard !== 'object') {
+        defined = "";
+    if (typeof curve.defined !== 'object') {
       //TODO: Improve checking to ensure array of objects
       console.error("Curve standard not defined as expected:", curve.standard);
     } else {
-      curve.standard.forEach(function (singleStandard) {
-        standard.push(singleStandard.org + ' ' + singleStandard.std);
-        //TODO: Go to stdData[ curve.standard[0] ].standards[ curve.standard[1] ].abbr potentially.
-      });
+      defined = curve.defined.org + " " + curve.defined.std;
     }
 
     // curve description variables
@@ -82,49 +79,87 @@ var main = function ( crvData, stdData ) {
     else {
       $('#alias').text( 'none' );
     }
-    $('#curve-standard').text( standard.join('; ') );
+    $('#curve-standard').text( defined );
       
     // curve equation and parameters
     $('[data-form="curve"]').addClass("d-none");
 
-    if ( field == 'prime' || field == 'prime-squared' ) {
+    if ( field == 'prime' ) {
+      // update prime parameters
       $('#p-hex').text( curve.params.hex.p );
-      $('#a-hex').text( curve.params.hex.a );
-      $('#b-hex').text( curve.params.hex.b );
-        
+      $('#p-dec').text( curve.params.dec.p );
+      $('#a-dec').text( curve.params.dec.a );
+      $('#b-dec').text( curve.params.dec.b );
+      $('#x-dec').text( curve.params.dec.x );
+      $('#y-dec').text( curve.params.dec.y );
       $('#bit-size-prime').text( curve.bitsize );
-        
+    
+      // show-hide relavent prime parameters
       switch ( form ) {
         case 'short-weierstrass':
           $('#short-weierstrass-prime').toggleClass("d-none");
           break;
         case 'edwards':
           $('#edwards-prime').toggleClass("d-none");
-          $('#a-hex').text( curve.params.hex.a ); //TODO: Duplicated??
           break;
         case 'montgomery':
-          $('#montgomery-prime').toggleClass("d-none");          
-          $('#a-hex').text( curve.params.hex.a ); //TODO: Duplicated??
+          $('#montgomery-prime').toggleClass("d-none");
+          break;
       }
+      $('#f-param,#m-param,#k-param').addClass("d-none");
       $('#prime-field').toggleClass("d-none");
+      $('#p-param,#a-param,#b-param,#x-param,#y-param').removeClass("d-none");
     }
-    else if ( field == 'trinomial' ) {
-      console.warn("Trinomial curve not rendered.");
+    else if ( field == 'trinomial' || field == 'pentanomial' ) {
+      // update trinomial parameters
+      $('#f-hex').text( curve.params.hex.f );
+      $('#m-dec').text( curve.params.dec.m );
+        
+      // show-hide relavent trinomial parameters
+      $('#p-param').addClass("d-none");
+      switch ( form ) {
+        case 'short-weierstrass':
+          $('#short-weierstrass-binary').toggleClass("d-none");
+          break;
+        case 'edwards':
+          $('#edwards-binary').toggleClass("d-none");
+          break;
+        case 'montgomery':
+          $('#montgomery-binary').toggleClass("d-none");
+      }        
+      if ( $('#hex-toggle').hasClass("btn-white") ) {
+        $('#m-param,#k-param').removeClass("d-none");
+        $('#f-param,#a-param,#b-param,#x-param,#y-param').addClass("d-none");
+      }
+      else {
+        $('#m-param,#k-param').addClass("d-none");
+        $('#f-param,#a-param,#b-param,#x-param,#y-param').removeClass("d-none");
+      }
+        
+      if ( field == 'trinomial' ) {
+        $('#k-dec').text( curve.params.dec.k );
+        $('#bit-size-trinomial').text( curve.bitsize );      
+        $('#trinomial-field').toggleClass("d-none");
+      }
+      else if ( field == 'pentanomial' ) {
+        $('#k1-dec').text( curve.params.dec.k1 );
+        $('#k2-dec').text( curve.params.dec.k2 );
+        $('#k3-dec').text( curve.params.dec.k3 );
+        $('#bit-size-pentanomial').text( curve.bitsize );      
+        $('#pentanomial-field').toggleClass("d-none");
+      }
     }
-    else if ( field == 'pentanomial' ) {
-      console.warn("Pentanomial curve not rendered.");
+    else {
+      console.warn("Invalid field definition.");
     }
-
+      
+    $('#a-hex').text( curve.params.hex.a );
+    $('#b-hex').text( curve.params.hex.b );
     $('#x-hex').text( curve.params.hex.x );
     $('#y-hex').text( curve.params.hex.y );
     $('#q-hex').text( curve.params.hex.q );
     $('#h-hex').text( curve.params.hex.h );
 
-    $('#p-dec').text( curve.params.dec.p );
-    $('#a-dec').text( curve.params.dec.a );
-    $('#b-dec').text( curve.params.dec.b );
-    $('#x-dec').text( curve.params.dec.x );
-    $('#y-dec').text( curve.params.dec.y );
     $('#q-dec').text( curve.params.dec.q );
     $('#h-dec').text( curve.params.dec.h );
 
@@ -160,15 +195,27 @@ var main = function ( crvData, stdData ) {
   $('#hex-toggle').on('click', function() {
     if( $(this).hasClass('btn-white') ) {
       $('code[data-type="num"]').toggleClass('d-none');
-      $('#dec-toggle').removeClass('btn-primary').addClass('btn-white');
+        
+      // change parameters for binary fields
+      if ( $('#prime-field').hasClass( 'd-none' ) ) {
+        $('#f-param,#m-param,#k-param,#a-param,#b-param,#x-param,#y-param').toggleClass('d-none');
+      }
+
       $('#hex-toggle').removeClass('btn-white').addClass('btn-primary');
+      $('#dec-toggle').removeClass('btn-primary').addClass('btn-white');
     }
   } );
   $('#dec-toggle').on('click', function() {
     if( $(this).hasClass('btn-white') ) {
       $('code[data-type="num"]').toggleClass('d-none');
+        
+      // change parameters for binary fields
+      if ( $('#prime-field').hasClass( 'd-none' ) ) {
+        $('#f-param,#m-param,#k-param,#a-param,#b-param,#x-param,#y-param').toggleClass('d-none');
+      }
+
       $('#hex-toggle').removeClass('btn-primary').addClass('btn-white');
-      $(this).removeClass('btn-white').addClass('btn-primary');
+      $('#dec-toggle').removeClass('btn-white').addClass('btn-primary');
     }
   } );
 
@@ -226,7 +273,7 @@ var main = function ( crvData, stdData ) {
       { title: 'Type' },
       { title: 'Name' }
     ],
-    scrollY: 500,
+    scrollY: "90vh",
     scrollCollapse: true,
     paging: false,
     searching: false,

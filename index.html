@@ -160,56 +160,82 @@
                         <span id="montgomery-prime" data-form="curve">
                           Montgomery curve $$E: \: B \, y^2 \equiv x^3 + A \, x^2 + x \pmod{p}$$
                         </span>
+                        <span id="short-weierstrass-binary" data-form="curve">
+                          Short Weierstass curve $$E: \: y^2 + x y \equiv_2 x^3 + A \, x^2 + B \pmod{f(x)}$$
+                        </span>
                           
                         <span id="prime-field" data-form="curve">over the large-characteristic finite field \(GF(p)\) where \(p\) is a <span id="bit-size-prime"></span>-bit prime number.</span>
+                        <span id="trinomial-field" data-form="curve">over the finite field \(GF(2^m)\) with binary irreducible polynomial basis $$f(x) = x^m + x^k + 1$$ where \(m\) is a <span id="bit-size-trinomial"></span>-bit number.</span>
+                        <span id="pentanomial-field" data-form="curve">over the finite field \(GF(2^m)\) with binary irreducible polynomial basis $$f(x) = x^m + x^{k_3} + x^{k_2} + x^{k_1} + 1$$ where \(m\) is a <span id="bit-size-pentanomial"></span>-bit number.</span>
                       </p>
 
                       <div class="table-responsive">
                       <table class="table table-borderless table-sm">
                       <tbody>
-                        <tr>
+                        <tr id="p-param">
                           <th class="text-center" width="50px;"><a href="#" data-toggle="tooltip" data-title="Characteristic of prime field">\(p\)</a></th>
                           <td class="text-truncate">
                             <code id="p-hex" data-type="num"></code>
                             <code id="p-dec" data-type="num" class="d-none"></code>
                           </td>
                         </tr>
-                        <tr>
+                        <tr id="f-param">
+                          <th class="text-center" width="50px;"><a href="#" data-toggle="tooltip" data-title="Irreducible polynomial">\(f\)</a></th>
+                          <td class="text-truncate">
+                            <code id="f-hex" data-type="num"></code>
+                          </td>
+                        </tr>
+                        <tr id="m-param">
+                          <th class="text-center" width="50px;"><a href="#" data-toggle="tooltip" data-title="Exponent of binary characteristic">\(m\)</a></th>
+                          <td class="text-truncate">
+                            <code id="m-dec" data-type="num" class="d-none"></code>
+                          </td>
+                        </tr>
+                        <tr id="k-param">
+                          <th class="text-center" width="50px;"><a href="#" data-toggle="tooltip" data-title="Basis polynomial exponent">\(k\)</a></th>
+                          <td class="text-truncate">
+                            <code id="k-dec" data-type="num" class="d-none"></code>
+                            <code id="k1-dec" data-type="num" class="d-none"></code>
+                            <code id="k2-dec" data-type="num" class="d-none"></code>
+                            <code id="k3-dec" data-type="num" class="d-none"></code>
+                          </td>
+                        </tr>
+                        <tr id="a-param">
                           <th class="text-center"><a href="#" data-toggle="tooltip" data-title="Curve coefficient">\(A\)</a></th>
                           <td class="text-truncate"> 
                             <code id="a-hex" data-type="num"></code>
                             <code id="a-dec" data-type="num" class="d-none"></code>
                           </td>
                         </tr>
-                        <tr>
+                        <tr id="b-param">
                           <th class="text-center"><a href="#" data-toggle="tooltip" data-title="Curve coefficient">\(B\)</a></th>
                           <td class="text-truncate">
                             <code id="b-hex" data-type="num"></code>
                             <code id="b-dec" data-type="num" class="d-none"></code>
                           </td>
                         </tr>
-                        <tr>
+                        <tr id="x-param">
                           <th class="text-center"><a href="#" data-toggle="tooltip" data-title="Basepoint x-coordinate">\(G_x\)</a></th>
                           <td class="text-truncate">
                             <code id="x-hex" data-type="num"></code>
                             <code id="x-dec" data-type="num" class="d-none"></code>
                           </td>
                         </tr>
-                        <tr>
+                        <tr id="y-param">
                           <th class="text-center"><a href="#" data-toggle="tooltip" data-title="Basepoint y-coordinate">\(G_y\)</th>
                           <td class="text-truncate">
                             <code id="y-hex" data-type="num"></code>
                             <code id="y-dec" data-type="num" class="d-none"></code>
                           </td>
                         </tr>
-                        <tr>
+                        <tr id="q-param">
                           <th class="text-center"><a href="#" data-toggle="tooltip" data-title="Order of basepoint ⟨G⟩">\(q\)</a></th>
                           <td class="text-truncate">
                             <code id="q-hex" data-type="num"></code>
                             <code id="q-dec" data-type="num" class="d-none"></code>
                           </td>
                         </tr>
-                        <tr>
+                        <tr id="h-param">
                           <th class="text-center"><a href="#" data-toggle="tooltip" data-title="Cofactor to basepoint order">\(h\)</a></th>
                           <td class="text-truncate">
                             <code id="h-hex" data-type="num"></code>
