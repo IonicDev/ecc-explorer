@@ -764,7 +764,7 @@
       "ansit409r1"
     ],
     "bitsize": "409",
-    "field": "trinomal", 
+    "field": "trinomial", 
     "form": "short-weierstrass", 
     "generated": "random", 
     "params": {

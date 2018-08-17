@@ -57,6 +57,9 @@ var main = function ( crvData, stdData ) {
   // curves dataTable navigation
   $('#curves-table tbody').on('click','tr', function ( ) {
 
+    $('#curve-intro').addClass("d-none");
+    $('#curve-description').removeClass("d-none");
+      
     var curveName = $(this).children('td:first').text();      
     if ( crvData[ curveName ].ref != undefined ) {
       curveName = crvData[ curveName ].ref;
@@ -112,12 +115,13 @@ var main = function ( crvData, stdData ) {
       }
       $('#f-param,#m-param,#k-param').addClass("d-none");
       $('#prime-field').toggleClass("d-none");
-      $('#p-param,#a-param,#b-param,#x-param,#y-param').removeClass("d-none");
+      $('#p-param,#a-param,#b-param,#x-param,#y-param,#n-param,#h-param').removeClass("d-none");
     }
     else if ( field == 'trinomial' || field == 'pentanomial' ) {
       // update trinomial parameters
       $('#f-hex').text( curve.params.hex.f );
       $('#m-dec').text( curve.params.dec.m );
+      $('#k-dec').text( curve.params.dec.k )
         
       // show-hide relavent trinomial parameters
       $('#p-param').addClass("d-none");
@@ -132,23 +136,19 @@ var main = function ( crvData, stdData ) {
           $('#montgomery-binary').toggleClass("d-none");
       }        
       if ( $('#hex-toggle').hasClass("btn-white") ) {
-        $('#m-param,#k-param').removeClass("d-none");
+        $('#m-param,#k-param,#n-param,#h-param').removeClass("d-none");
         $('#f-param,#a-param,#b-param,#x-param,#y-param').addClass("d-none");
       }
       else {
         $('#m-param,#k-param').addClass("d-none");
-        $('#f-param,#a-param,#b-param,#x-param,#y-param').removeClass("d-none");
+        $('#f-param,#a-param,#b-param,#x-param,#y-param,#n-param,#h-param').removeClass("d-none");
       }
         
       if ( field == 'trinomial' ) {
-        $('#k-dec').text( curve.params.dec.k );
         $('#bit-size-trinomial').text( curve.bitsize );      
         $('#trinomial-field').toggleClass("d-none");
       }
       else if ( field == 'pentanomial' ) {
-        $('#k1-dec').text( curve.params.dec.k1 );
-        $('#k2-dec').text( curve.params.dec.k2 );
-        $('#k3-dec').text( curve.params.dec.k3 );
         $('#bit-size-pentanomial').text( curve.bitsize );      
         $('#pentanomial-field').toggleClass("d-none");
       }
@@ -288,6 +288,9 @@ var main = function ( crvData, stdData ) {
   // standards dataTable navigation
   $('#org-table tbody').on('click','tr', function ( ) {
 
+    $('#standard-intro').addClass("d-none");
+    $('#standard-description').removeClass("d-none");
+      
     var thisOrg = $(this).children('td:last').text(),
         std = stdData[ thisOrg ];
     
