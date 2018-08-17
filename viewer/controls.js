@@ -161,10 +161,10 @@ var main = function ( crvData, stdData ) {
     $('#b-hex').text( curve.params.hex.b );
     $('#x-hex').text( curve.params.hex.x );
     $('#y-hex').text( curve.params.hex.y );
-    $('#q-hex').text( curve.params.hex.q );
+    $('#n-hex').text( curve.params.hex.n );
     $('#h-hex').text( curve.params.hex.h );
 
-    $('#q-dec').text( curve.params.dec.q );
+    $('#n-dec').text( curve.params.dec.n );
     $('#h-dec').text( curve.params.dec.h );
 
     // Reset all values in case where you are switching to doesn't have them defined:
