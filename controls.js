@@ -12,7 +12,7 @@ $(document).ready(function() {
         }
       })
       .fail(function(err) {
-        console.error("Request for data failed: " + err);
+        console.error("Request for data failed:", err);
         //TODO: Display in UI.
       })
 });
