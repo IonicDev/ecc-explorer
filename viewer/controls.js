@@ -29,6 +29,10 @@ var main = function ( crvData, stdData ) {
 
 //-- 'curves' tab events --//
 
+  // Set initial states
+  $('#alias').text( "Select a curve on the left to begin." );
+
+  // Render list of curves on the left selection bar
   var curveRows = [];
   $.each( crvData, function (i) {
     curveRows.push([i]);
@@ -62,12 +66,12 @@ var main = function ( crvData, stdData ) {
         oid = curve.oid,
         field = curve.field,
         form = curve.form,
-        defined = "";
+        stdDefinedIn = "";
     if (typeof curve.defined !== 'object') {
       //TODO: Improve checking to ensure array of objects
       console.error("Curve standard not defined as expected:", curve.standard);
     } else {
-      defined = curve.defined.org + " " + curve.defined.std;
+      stdDefinedIn = curve.defined.org + " " + curve.defined.std;
     }
 
     // curve description variables
@@ -79,8 +83,8 @@ var main = function ( crvData, stdData ) {
     else {
       $('#alias').text( 'none' );
     }
-    $('#curve-standard').text( defined );
-      
+    $('#curve-standard').text( stdDefinedIn );
+
     // curve equation and parameters
     $('[data-form="curve"]').addClass("d-none");
 
