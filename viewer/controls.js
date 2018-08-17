@@ -1,7 +1,7 @@
 $(document).ready(function() {
   $.when(
-      $.getJSON('/curveData.json'),
-      $.getJSON('/standardsData.json')
+      $.getJSON('curveData.json'),
+      $.getJSON('standardsData.json')
   )
       .then(function( cData, sData ) {
         if ( cData[1] == "success" && sData[1] == "success" ) {
