@@ -38,7 +38,7 @@ var main = function ( crvData, stdData ) {
   var curvesDataTable = $('#curves-table').DataTable( {
     data: curveRows,
     columns: [ { title: 'Curve Name' } ],
-    scrollY: "90vh",
+    scrollY: "80vh",
     scrollCollapse: true,
     paging: false,
     searching: false,
@@ -313,7 +313,7 @@ var main = function ( crvData, stdData ) {
     var stdDocsDataTable = $('#standards-table').DataTable( {
       destroy: true,
       data: stdRows,
-      scrollY: 500,
+      scrollY: '80vh',
       scrollCollapse: true,
       paging: false,
       searching: false,

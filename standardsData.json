@@ -370,21 +370,23 @@
           "allowed": [ ]
         }
       },
-      "WAPIP": {
-        "abbr": "WAPIP",
+      "GB15629.11": {
+        "abbr": "GB 15629.11-2003",
         "name": "ECDSA and ECDH Elliptic Curve cryptographic algorithms and parameters of wireless LAN products used",
         "alt": "无线局域网产品采用的ECDSA和ECDH密码算法椭圆曲线和参数",
-        "site": "",
+        "site": "http://www.gb688.cn/bzgk/gb/newGbInfo?hcno=74B9DD11287E72408C19C4D3A360D1BD",
         "file": "http://www.oscca.gov.cn/sca/c100061/201611/1002425/files/9daac3ab8461489a97bf8b6481f9cdc8.pdf",
         "free": true,
-        "year": "2016",
+        "year": "2003",
         "status": {
           "state": "active",
           "successor": null,
           "predecessor": null
         },
         "curves": {
-          "defined": [ "wapip192v1" ]
+          "defined": [ 
+            "wapip192v1" 
+          ]
         }
       }
     }
