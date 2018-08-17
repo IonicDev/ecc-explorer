@@ -4,6 +4,7 @@ There are a number of elliptic curves standards and families defined from global
 Often finding the references, translating documents, identifying when standards were introduced or deprecated, and identifying standardized test vectors is very difficult - especially with deprecated or international standards.
 
 At Ionic Security, our Research Team explores how to apply cryptographic techniques that – combined with the Ionic Data Trust Platform – can deliver new and unique value to companies that desire secure and scalable data security solutions.
+
 As part of this effort, the Ionic Security Research Team is publishing this repository and <a href="https://ionicdev.github.io/ecc-explorer/">associated webpage</a> to help others working with elliptic curves.
 You can find a list of curves with parameters and test vectors as well as standards.
 
