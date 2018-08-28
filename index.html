@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="Elliptic curve standards and parameters.">
     <meta name="author" content="Ionic Security">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="theme-color" content="#007bff">
 
     <!-- origin -->
@@ -24,7 +25,7 @@
         position: relative;
         bottom: 0;
         width: 100%;
-        height: 50px; /* Set the fixed height of the footer here */
+        min-height: 50px; /* Set the fixed height of the footer here */
         background-color: #f5f5f5;
         padding: 5px;
       }
@@ -34,7 +35,7 @@
     </style>
     <title>Elliptic Curves</title>
   </head>
-    
+
   <body>
     <div class="container-fluid">
       <h1 class="display-4">Elliptic Curves</h1>
@@ -53,35 +54,29 @@
       </ul>        
         
       <!-- content body -->
-      <main class="tab-content container-fluid" id="myTabContent">
+      <main class="tab-content container-fluid">
         
         <!-- home tab -->
         <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
           <p></p>
-          <div class="container">
-            <div class="row">
-              <div class="col-md-6">
-                <p>
-                  There are a number of elliptic curves standards and families defined from global industry, academic, and government institutions.
-                  Often finding the references, translating documents, identifying when standards were introduced or deprecated, and identifying standardized test vectors is very difficult - especially with deprecated or international standards.
-                </p>
-                <p>
-                  At Ionic Security, our Research Team explores how to apply cryptographic techniques that – combined with the Ionic Data Trust Platform – can deliver new and unique value to companies that desire secure and scalable data security solutions.
-                  As part of this effort, the Ionic Security Research Team is publishing this webpage, and <a href="https://github.com/IonicDev/ecc-explorer">associated repository</a> to help others working with elliptic curves.
-                  You can find a list of curves with parameters and test vectors as well as standards.
-                </p>
-                <p>
-                  Contributions are welcome to add curves or identify any mistakes that are found, and can be done via the <a href="https://github.com/IonicDev/ecc-explorer">associated repository</a> in pull requests or by submitting issues.
-                </p>
-                <p>
-                  The <a href="https://ionic.com">Ionic Data Trust Platform</a> is built upon the principle that a customer can have full control over their data and the keys with which it is protected – without needing to place trust in any external party.
-                  We often refer to this as “In Math We Trust” – a principle which we take seriously and apply to all the cryptographic primitives that support the Ionic Data Trust Platform.
-                </p>
-              </div>
-              <div class="col-md-6">
-                  <img src="/viewer/elliptic-curve.svg" alt="Elliptic Curve Properties" />
-              </div>
-            </div>
+          <div class="container-fluid">
+            <img src="/viewer/elliptic-curve.svg" class="w-50 float-right" alt="Elliptic Curve Properties" style="max-height: 600px;" />
+              <p>
+              There are a number of elliptic curves standards and families defined from global industry, academic, and government institutions.
+              Often finding the references, translating documents, identifying when standards were introduced or deprecated, and identifying standardized test vectors is very difficult - especially with deprecated or international standards.
+              </p>
+              <p>
+              At Ionic Security, our Research Team explores how to apply cryptographic techniques that – combined with the Ionic Data Trust Platform – can deliver new and unique value to companies that desire secure and scalable data security solutions.
+              As part of this effort, the Ionic Security Research Team is publishing this webpage, and <a href="https://github.com/IonicDev/ecc-explorer">associated repository</a> to help others working with elliptic curves.
+              You can find a list of curves with parameters and test vectors as well as standards.
+              </p>
+              <p>
+              Contributions are welcome to add curves or identify any mistakes that are found, and can be done via the <a href="https://github.com/IonicDev/ecc-explorer">associated repository</a> in pull requests or by submitting issues.
+              </p>
+              <p>
+              The <a href="https://ionic.com">Ionic Data Trust Platform</a> is built upon the principle that a customer can have full control over their data and the keys with which it is protected – without needing to place trust in any external party.
+              We often refer to this as “In Math We Trust” – a principle which we take seriously and apply to all the cryptographic primitives that support the Ionic Data Trust Platform.
+              </p>
           </div>
         </div>
 
@@ -89,22 +84,36 @@
         <div class="tab-pane fade" id="curves" role="tabpanel" aria-labelledby="curves-tab">
           <p></p>
           <div class="container-fluid">
-              
+
+            <div class="row d-md-none">
+                
+                <div class="form">
+                  <div class="form-group row">
+                    <label for="curve-select" class="col-sm-2 col-form-label font-weight-bold">Curve: </label>
+                    <div class="col-sm-10">
+                      <select class="form-control form-control-sm" id="curve-select">
+                        <option disabled selected value> --- select curve --- </option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+
+            </div>
             <div class="row">
-              <div class="col-sm-3">
+              <div class="col-sm-3 d-none d-md-inline">
                 
                 <!-- curve name datatable -->
                 <table id="curves-table" class="table table-hover table-sm"></table>
 
               </div>
-              <div id="curve-intro" class="col-sm-9">
-
+              <div id="curve-intro" class="col-md-9">
+                  
                 <div class="alert alert-info" role="alert">
-                Select a curve from the menu to begin.
+                Select a curve<span class="d-none d-sm-inline"> from the menu</span> to begin.
                 </div>
 
               </div>
-              <div id="curve-description" class="col-sm-9 d-none">
+              <div id="curve-description" class="col-md-9 d-none">
 
                 <!-- curve description panel -->
                 <div class="card">
@@ -138,8 +147,8 @@
 
                         <!-- more information menu buttons -->
                         <div class="btn-group" role="group" data-toggle="buttons-checkbox" aria-label="information menu">
-                          <button type="button" data-toggle="collapse" data-target="#curve-params" aria-pressed="true" aria-expanded="true" aria-controls="curve-params" class="btn btn-info btn-small active">Parameters</button>
-                          <button type="button" data-toggle="collapse" data-target="#test-vectors" aria-pressed="false" aria-expanded="false" aria-controls="test-vectors" class="btn btn-info btn-small">Test Vectors</button>
+                          <button type="button" data-toggle="collapse" data-target="#curve-params" aria-pressed="true" aria-expanded="true" aria-controls="curve-params" class="btn btn-info btn-sm active">Param<span class="d-none d-md-inline">eter</span>s</button>
+                          <button type="button" data-toggle="collapse" data-target="#test-vectors" aria-pressed="false" aria-expanded="false" aria-controls="test-vectors" class="btn btn-info btn-sm"><span class="d-none d-md-inline">Test </span>Vectors</button>
                         </div>
                         
                         <!-- number conversion menu buttons -->
@@ -349,22 +358,37 @@
         <div class="tab-pane fade" id="standards" role="tabpanel" aria-labelledby="standards-tab">
           <p></p>
           <div class="container-fluid">
-              
+            <div class="row d-md-none">
+                
+            <div class="form">
+              <div class="form-group row">
+                <label for="standard-select" class="col-sm-2 col-form-label font-weight-bold">
+                Standard:
+                </label>
+                <div class="col-sm-10">
+                  <select class="form-control form-control-sm" id="standard-select">
+                    <option disabled selected value> --- select standard --- </option>
+                  </select>
+                </div>
+              </div>
+            </div>
+
+            </div>
             <div class="row">
-              <div class="col-3">
+              <div class="d-none d-md-inline col-lg-3 col-md-4">
                 
                 <!-- curve name datatable -->
                 <table id="org-table" class="table table-hover table-sm"></table>
 
               </div>
-              <div id="standard-intro" class="col-sm-9">
+              <div id="standard-intro" class="col-lg-9 col-md-8 col-sm-12">
 
                 <div class="alert alert-info" role="alert">
-                Select a standard from the menu to begin.
+                Select a standard<span class="d-none d-sm-inline"> from the menu</span> to begin.
                 </div>
 
               </div>
-              <div id="standard-description" class="col-sm-9 d-none">
+              <div id="standard-description" class="d-none col-lg-9 col-md-8 col-sm-12">
                   
                 <!-- curve description panel -->
                 <div class="card">
@@ -377,29 +401,22 @@
                   <!-- curve description -->
                   <div class="card-body">
 
-                    <div class="row">
-                      <div class="col-md-9">
-                          
-                        <!-- curve source -->
-                        <table class="table table-borderless table-sm" width="100%">
-                          <tbody>
-                            <tr>
-                              <th class="text-right" width="50px;">Name:</th>
-                              <td colspan="3"><span id="org-name"></span></td>
-                            </tr>
-                            <tr>
-                              <th class="text-right" width="50px;">Type:</th>
-                              <td><span id="org-type"></span></td>
-                              <th class="text-right" width="50px;">Region:</th>
-                              <td><span id="org-region"></span></td>
-                            </tr>
-                          </tbody>
-                        </table>
-                          
-                      </div>
-                      <div class="col-md-3">
+                    <div class="row clearfix">
+                      <div class="col-md-3 float-right">
                         <div class="text-center">
-                          <img id="org-logo" class="img-fluid align-middle" style="max-height: 100px;">
+                          <img id="org-logo" class="img-fluid align-middle mb-3" style="max-height: 100px;">
+                        </div>
+                      </div>
+                      <div class="col-md-9">                          
+                        <div class="row">
+                          <dt class="col-sm-2 text-nowrap">Name:</dt>
+                          <dd class="col-sm-10 text-truncate"><span id="org-name"></span></dd>
+                        </div>
+                        <div class="row">
+                              <dt class="col-4 col-sm-2 text-nowrap">Type:</dt>
+                              <dd class="col-6 col-sm-10 text-truncate"><span id="org-type"></span></dd>
+                              <dt class="col-4 col-sm-2 text-nowrap">Region:</dt>
+                              <dd class="col-6 col-sm-10 text-truncate"><span id="org-region"></span></dd>
                         </div>
                       </div>
                     </div>
@@ -444,9 +461,7 @@
                 <!-- org curves card -->
                 <div id="org-curves" class="container collapse">
                   <div class="card rounded-0 border-top-0">
-                    <div class="card-body">
-
-                    </div>
+                    <div class="card-body"></div>
                   </div>
                 </div>
                   
@@ -467,9 +482,8 @@
 
       <footer class="footer">
         <div class="text-muted">
-          You acknowledge your access, review and use of the documentation on this page is subject to the Ionic Security Inc. <a href="https://dev.ionic.com/use">Documentation Use Rights.</a>
-          <br>
-          Copyright 2018 Ionic Security Inc. All rights reserved. Ionic Security®, In Math We Trust™, and IONIC™ are trademarks and registered trademarks of Ionic Security Inc. in the United States and certain other countries. All trademarks, tradenames, or product names of other companies or organizations belong to their respective owners.  | <a href="https://www.ionic.com/privacy-notice/">PRIVACY NOTICE</a> |
+          <p>You acknowledge your access, review and use of the documentation on this page is subject to the Ionic Security Inc. <a href="https://dev.ionic.com/use">Documentation Use Rights.</a></p>
+          <p>Copyright 2018 Ionic Security Inc. All rights reserved. Ionic Security®, In Math We Trust™, and IONIC™ are trademarks and registered trademarks of Ionic Security Inc. in the United States and certain other countries. All trademarks, tradenames, or product names of other companies or organizations belong to their respective owners.  | <a href="https://www.ionic.com/privacy-notice/">PRIVACY NOTICE</a> |</p>
         </div>
       </footer>
 

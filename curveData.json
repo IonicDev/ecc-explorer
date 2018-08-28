@@ -1,5 +1,6 @@
 {
   "P-192": {
+    "name": "Curve P-192",
     "oid": "1.2.840.10045.3.1.1", 
     "alias": [ 
       "secp192r1", 
@@ -85,6 +86,7 @@
     }
   },
   "P-224": {
+    "name": "Curve P-224",
     "oid": "1.3.132.0.33", 
     "alias": [ 
       "secp224r1", 
@@ -170,6 +172,7 @@
     }
   },
   "P-256": {
+    "name": "Curve P-256",
     "oid": "1.2.840.10045.3.1.7", 
     "alias": [
       "ansip224r1",
@@ -255,6 +258,7 @@
     }
   },
   "P-384": {
+    "name": "Curve P-384",
     "oid": "1.3.132.0.34", 
     "alias": [
       "secp384r1",
@@ -339,6 +343,7 @@
     }
   },
   "P-521": {
+    "name": "Curve P-521",
     "oid": "1.3.132.0.35",
     "alias": [ 
       "secp521r1",
@@ -423,6 +428,7 @@
     }
   },
   "K-163": {
+    "name": "Curve K-163",
     "oid": "1.3.132.0.9",
     "alias": [
       "secp160k1",
@@ -487,6 +493,7 @@
     }
   },
   "K-233": {
+    "name": "Curve K-233",
     "oid": "1.3.132.0.26", 
     "alias": [ 
       "sect233k1", 
@@ -548,6 +555,7 @@
     }
   },
   "K-283": {
+    "name": "Curve K-283",
     "oid": "1.3.132.0.16", 
     "alias": [ 
       "ansit283k1", 
@@ -611,6 +619,7 @@
     }
   },
   "K-409": {
+    "name": "Curve K-409",
     "oid": "1.3.132.0.36", 
     "alias": [ 
       "ansit409k1", 
@@ -672,6 +681,7 @@
     }
   },
   "K-571": {
+    "name": "Curve K-571",
     "oid": "1.3.132.0.38", 
     "alias": [ 
       "sect571k1", 
@@ -735,6 +745,7 @@
     }
   },
   "B-163": {
+    "name": "Curve B-163",
     "oid": "1.3.132.0.15", 
     "alias": [
       "sect163r2",
@@ -799,6 +810,7 @@
     }
   },
   "B-233": {
+    "name": "Curve B-233",
     "oid": "1.3.132.0.27", 
     "alias": [ 
       "sect233r1", 
@@ -862,6 +874,7 @@
     }
   },
   "B-283": {
+    "name": "Curve B-283",
     "oid": "1.3.132.0.17", 
     "alias": [
       "sect283r1",
@@ -926,6 +939,7 @@
     }
   },
   "B-409": {
+    "name": "Curve B-409",
     "oid": "1.3.132.0.37", 
     "alias": [
       "sect409r1",
@@ -988,6 +1002,7 @@
     }   
   },
   "B-571": {
+    "name": "Curve B-571",
     "oid": "1.3.132.0.39", 
     "alias": [
       "sect571r1",
@@ -1052,6 +1067,7 @@
     }
   },
   "secp112r1": {
+    "name": "secp112r1",
     "oid": "1.3.132.0.6", 
     "alias": [ "wap-wsg-idm-ecid-wtls6" ], 
     "bitsize": "112", 
@@ -1133,6 +1149,7 @@
     }
   }, 
   "secp112r2": {
+    "name": "secp112r2",
     "alias": null, 
     "bitsize": "112", 
     "field": "prime", 
@@ -1214,6 +1231,7 @@
     }
   }, 
   "secp128r1": {
+    "name": "secp128r1",
     "alias": null, 
     "bitsize": "128", 
     "field": "prime", 
@@ -1295,6 +1313,7 @@
     }
   }, 
   "secp128r2": {
+    "name": "secp128r2",
     "alias": null, 
     "bitsize": "128", 
     "field": "prime", 
@@ -1376,6 +1395,7 @@
     }
   }, 
   "secp160k1": {
+    "name": "secp160k1",
     "alias": [ "ansip160k1" ], 
     "bitsize": "160", 
     "field": "prime", 
@@ -1456,6 +1476,7 @@
     }
   },
   "secp160r1": {
+    "name": "secp160r1",
     "oid": "1.3.132.0.8", 
     "alias": null, 
     "bitsize": "160", 
@@ -1537,6 +1558,7 @@
     }
   },
   "secp160r2": {
+    "name": "secp160r2",
     "alias": [ "ansip160r2" ], 
     "bitsize": "160", 
     "field": "prime", 
@@ -1618,6 +1640,7 @@
     }
   },
   "secp192k1": {
+    "name": "secp192k1",
     "oid": "1.3.132.0.31", 
     "alias": [ "ansip192k1" ], 
     "bitsize": "192", 
@@ -1698,6 +1721,7 @@
     }
   },
   "secp192r1": {
+    "name": "secp192r1",
     "oid": "1.2.840.10045.3.1.1",
     "ref": "P-192",
     "defined": {
@@ -1706,6 +1730,7 @@
     }
   },
   "secp224k1": {
+    "name": "secp224k1",
     "oid": "1.3.132.0.32", 
     "alias": null, 
     "bitsize": "224",
@@ -1786,6 +1811,7 @@
     }
   }, 
   "secp224r1": {
+    "name": "secp224r1",
     "oid": "1.3.132.0.33",
     "ref": "P-224",
     "defined": {
@@ -1794,6 +1820,7 @@
     }
   },
   "secp256k1": {
+    "name": "secp256k1",
     "oid": "1.3.132.0.10", 
     "alias": null, 
     "bitsize": "256", 
@@ -1874,6 +1901,7 @@
     }
   }, 
   "secp256r1": {
+    "name": "secp256r1",
     "oid": "1.2.840.10045.3.1.7",
     "ref": "P-256",
     "defined": {
@@ -1882,6 +1910,7 @@
     }
   }, 
   "secp384r1": {
+    "name": "secp384r1",
     "oid": "1.3.132.0.34",
     "ref": "P-384",
     "defined": {
@@ -1890,6 +1919,7 @@
     }
   },
   "secp521r1": {
+    "name": "secp521r1",
     "oid": "1.3.132.0.35",
     "ref": "P-521",
     "defined": {
@@ -1898,6 +1928,7 @@
     }
   },
   "sect113r1": {
+    "name": "sect113r1",
     "oid": "1.3.132.0.4",
     "alias": [ "wap-wsg-idm-ecid-wtls4" ],
     "bitsize": "113",
@@ -1957,6 +1988,7 @@
     }
   },
   "sect113r2": {
+    "name": "sect113r2",
     "oid": "1.3.132.0.5",
     "alias": null,
     "bitsize": "113",
@@ -2016,6 +2048,7 @@
     }
   },
   "sect131r1": {
+    "name": "sect131r1",
     "oid": "1.3.132.0.22",
     "alias": null,
     "bitsize": "131",
@@ -2077,6 +2110,7 @@
     }
   },
   "sect131r2": {
+    "name": "sect131r2",
     "oid": "1.3.132.0.23",
     "alias": null,
     "bitsize": "131",
@@ -2138,6 +2172,7 @@
     }
   },
   "sect163k1": {
+    "name": "sect163k1",
     "oid": "1.3.132.0.1",
     "ref": "K-163",
     "defined": {
@@ -2146,6 +2181,7 @@
     }
   },
   "sect163r1": {
+    "name": "sect163r1",
     "oid": "1.3.132.0.2",
     "ref": "B-163",
     "defined": {
@@ -2154,6 +2190,7 @@
     }
   },
   "sect163r2": {
+    "name": "sect163r2",
     "oid": "1.3.132.0.15",
     "alias": [ "ansit163r2" ],
     "bitsize": "163",
@@ -2215,6 +2252,7 @@
     }
   },
   "sect233k1": {
+    "name": "sect233k1",
     "oid": "1.3.132.0.26",
     "ref": "K-233",
     "defined": {
@@ -2223,6 +2261,7 @@
     }
   },
   "sect233r1": {
+    "name": "sect233r1",
     "oid": "1.3.132.0.27", 
     "ref": "B-233",
     "defined": {
@@ -2231,6 +2270,7 @@
     }
   },
   "sect239k1": {
+    "name": "sect239k1",
     "oid": "1.3.132.0.3",
     "alias": [ "ansit239k1" ],
     "bitsize": "239",
@@ -2289,6 +2329,7 @@
     }
   },
   "sect283k1": {
+    "name": "sect283k1",
     "oid": "1.3.132.0.16",
     "ref": "K-283",
     "defined": {
@@ -2297,6 +2338,7 @@
     }
   },
   "sect283r1": {
+    "name": "sect283r1",
     "oid": "1.3.132.0.17",
     "ref": "B-283",
     "defined": {
@@ -2305,6 +2347,7 @@
     }
   },
   "sect409k1": {
+    "name": "sect409k1",
     "oid": "1.3.132.0.36",
     "ref": "K-409",
     "defined": {
@@ -2313,6 +2356,7 @@
     }
   },
   "sect409r1": {
+    "name": "sect409r1",
     "oid": "1.3.132.0.37",
     "ref": "B-409",
     "defined": {
@@ -2321,6 +2365,7 @@
     }
   },
   "sect571k1": {
+    "name": "sect571k1",
     "oid": "1.3.132.0.38",
     "ref": "K-571",
     "defined": {
@@ -2329,6 +2374,7 @@
     }
   },
   "sect571r1": {
+    "name": "sect571r1",
     "oid": "1.3.132.0.39",
     "ref": "B-571",
     "defined": {
@@ -2337,6 +2383,7 @@
     }
   },
   "ansip160k1": {
+    "name": "ansip160k1",
     "oid": "1.3.132.0.9",
     "ref": "secp160k1",
     "defined": {
@@ -2345,6 +2392,7 @@
     }
   },
   "ansip160r2": {
+    "name": "ansip160r2",
     "oid": "1.3.132.0.30",
     "ref": "secp160r2",
     "defined": {
@@ -2353,6 +2401,7 @@
     }
   },
   "ansip192k1": {
+    "name": "ansip192k1",
     "oid": "1.3.132.0.31", 
     "ref": "secp192k1",
     "defined": {
@@ -2361,6 +2410,7 @@
     }
   },
   "ansip192r1": {
+    "name": "ansip192r1",
     "oid": "1.2.840.10045.3.1.1", 
     "ref": "P-192",
     "defined": {
@@ -2369,6 +2419,7 @@
     }
   },
   "ansip224r1": {
+    "name": "ansip224r1",
     "oid": "1.3.132.0.33",
     "ref": "P-224",
     "defined": {
@@ -2377,6 +2428,7 @@
     }
   },
   "ansip384r1": {
+    "name": "ansip384r1",
     "oid": "1.3.132.0.34",
     "ref": "P-384",
     "defined": {
@@ -2385,6 +2437,7 @@
     }
   },
   "ansip521r1": {
+    "name": "ansip521r1",
     "oid": "1.3.132.0.35",
     "ref": "P-521",
     "defined": {
@@ -2393,6 +2446,7 @@
     }
   },
   "ansit163r2": {
+    "name": "ansit163r2",
     "oid": "1.3.132.0.15",
     "ref": "sect163r2",
     "defined": {
@@ -2401,6 +2455,7 @@
     }
   },
   "ansit233k1": {
+    "name": "ansit233k1",
     "oid": "1.3.132.0.26",
     "ref": "K-233",
     "defined": {
@@ -2409,6 +2464,7 @@
     }
   },
   "ansit233r1": {
+    "name": "ansit233r1",
     "oid": "1.3.132.0.27",
     "ref": "B-233",
     "defined": {
@@ -2417,6 +2473,7 @@
     }
   },
   "ansit283k1": {
+    "name": "ansit283k1",
     "oid": "1.3.132.0.16",
     "ref": "K-283",
     "defined": {
@@ -2425,6 +2482,7 @@
     }
   },
   "ansit283r1": {
+    "name": "ansit283r1",
     "oid": "1.3.132.0.17",
     "ref": "B-283",
     "defined": {
@@ -2433,6 +2491,7 @@
     }
   },
   "ansit409k1": {
+    "name": "ansit409k1",
     "oid": "1.3.132.0.36",
     "ref": "K-409",
     "defined": {
@@ -2441,6 +2500,7 @@
     }
   },
   "ansit409r1": {
+    "name": "ansit409r1",
     "oid": "1.3.132.0.37",
     "ref": "B-409",
     "defined": {
@@ -2449,6 +2509,7 @@
     }
   },
   "ansit571k1": {
+    "name": "ansit571k1",
     "oid": "1.3.132.0.38",
     "ref": "K-571",
     "defined": {
@@ -2457,6 +2518,7 @@
     }
   },
   "ansit571r1": {
+    "name": "ansit571r1",
     "oid": "1.3.132.0.39",
     "ref": "B-571",
     "defined": {
@@ -2465,6 +2527,7 @@
     }
   },
   "c2pnb163v1": {
+    "name": "c2pnb163v1",
     "oid": "1.2.840.10045.3.0.1", 
     "alias": [ 
       "wap-wsg-idm-ecid-wtls5" 
@@ -2528,6 +2591,7 @@
     }
   },
   "c2pnb163v2": {
+    "name": "c2pnb163v2",
     "oid": "1.2.840.10045.3.0.2", 
     "alias": null, 
     "bitsize": "163", 
@@ -2589,6 +2653,7 @@
     }
   },
   "c2pnb163v3": {
+    "name": "c2pnb163v3",
     "oid": "1.2.840.10045.3.0.3", 
     "alias": null, 
     "bitsize": "163", 
@@ -2650,6 +2715,7 @@
     }
   },
   "c2pnb176w1": { 
+    "name": "c2pnb176w1",
     "oid": "1.2.840.10045.3.0.4", 
     "alias": null, 
     "bitsize": "176", 
@@ -2711,6 +2777,7 @@
     }
   },
   "c2tnb191v1": {
+    "name": "c2tnb191v1",
     "oid": "1.2.840.10045.3.0.5", 
     "alias": null, 
     "bitsize": "191", 
@@ -2770,6 +2837,7 @@
     }
   },
   "c2tnb191v2": {
+    "name": "c2tnb191v2",
     "oid": "1.2.840.10045.3.0.6", 
     "alias": null, 
     "bitsize": "191", 
@@ -2829,6 +2897,7 @@
     }
   },
   "c2tnb191v3": {
+    "name": "c2tnb191v3",
     "oid": "1.2.840.10045.3.0.7", 
     "alias": null, 
     "bitsize": "191", 
@@ -2888,6 +2957,7 @@
     }
   },
   "c2onb191v4": {
+    "name": "c2onb191v4",
     "oid": "1.2.840.10045.3.0.8", 
     "alias": null, 
     "bitsize": "191", 
@@ -2926,6 +2996,7 @@
     }
   },
   "c2onb191v5": {
+    "name": "c2onb191v5",
     "oid": "1.2.840.10045.3.0.9", 
     "alias": null, 
     "bitsize": "191", 
@@ -2964,6 +3035,7 @@
     }
   },
   "c2pnb208w1": {
+    "name": "c2pnb208w1",
     "oid": "1.2.840.10045.3.0.10", 
     "alias": null, 
     "bitsize": "208", 
@@ -3023,17 +3095,38 @@
       }
     }
   },
-  "c2tnb239v1": { },
-  "c2tnb239v2": { },
-  "c2tnb239v3": { },
-  "c2onb239v4": { },
-  "c2onb239v5": { },
-  "c2pnb272w1": { },
-  "c2pnb304w1": { },
-  "c2tnb359v1": { },
-  "c2pnb368w1": { },
-  "c2tnb431r1": { },
+  "c2tnb239v1": {
+    "name": "c2tnb239v1"
+  },
+  "c2tnb239v2": {
+    "name": "c2tnb239v2"
+  },
+  "c2tnb239v3": {
+    "name": "c2tnb239v3"
+  },
+  "c2onb239v4": {
+    "name": "c2onb239v4"
+  },
+  "c2onb239v5": {
+    "name": "c2onb239v5"
+  },
+  "c2pnb272w1": {
+    "name": "c2pnb272w1"
+  },
+  "c2pnb304w1": {
+    "name": "c2pnb304w1"
+  },
+  "c2tnb359v1": {
+    "name": "c2tnb359v1"
+  },
+  "c2pnb368w1": {
+    "name": "c2pnb368w1"
+  },
+  "c2tnb431r1": {
+    "name": "c2tnb431r1"
+  },
   "brainpoolP160r1": {
+    "name": "brainpoolP160r1",
     "oid": "1.3.36.3.3.2.8.1.1.1", 
     "alias": null, 
     "bitsize": "160", 
@@ -3115,6 +3208,7 @@
     }
   }, 
   "brainpoolP192r1": {
+    "name": "brainpoolP192r1",
     "oid": "1.3.36.3.3.2.8.1.1.3", 
     "alias": null, 
     "bitsize": "192", 
@@ -3196,6 +3290,7 @@
     }
   }, 
   "brainpoolP224r1": {
+    "name": "brainpoolP224r1",
     "oid": "1.3.36.3.3.2.8.1.1.5", 
     "alias": null, 
     "bitsize": "224", 
@@ -3277,6 +3372,7 @@
     }
   }, 
   "brainpoolP256r1": {
+    "name": "brainpoolP256r1",
     "alias": null, 
     "bitsize": "256", 
     "field": "prime", 
@@ -3358,6 +3454,7 @@
     }
   }, 
   "brainpoolP320r1": {
+    "name": "brainpoolP320r1",
     "oid": "1.3.36.3.3.2.8.1.1.9", 
     "alias": null, 
     "bitsize": "320", 
@@ -3439,6 +3536,7 @@
     }
   }, 
   "brainpoolP384r1": {
+    "name": "brainpoolP384r1",
     "oid": "1.3.36.3.3.2.8.1.1.11", 
     "alias": null, 
     "bitsize": "384",
@@ -3520,6 +3618,7 @@
     }
   }, 
   "brainpoolP512r1": {
+    "name": "brainpoolP512r1",
     "oid": "1.3.36.3.3.2.8.1.1.13", 
     "alias": null, 
     "bitsize": "512", 
@@ -3601,31 +3700,31 @@
     }
   }, 
   "frp256v1": {
+    "name": "frp256v1",
+    "oid": "1.2.250.1.223.101.256.1", 
     "alias": null, 
     "bitsize": "256", 
     "field": "prime", 
     "form": "short-weierstrass", 
     "generated": "unknown", 
-    "oid": "1.2.250.1.223.101.256.1", 
     "params": {
       "dec": {
+        "p": "109454571331697278617670725030735128145969349647868738157201323556196022393859", 
         "a": "109454571331697278617670725030735128145969349647868738157201323556196022393856", 
         "b": "107744541122042688792155207242782455150382764043089114141096634497567301547839", 
-        "h": "1", 
-        "p": "109454571331697278617670725030735128145969349647868738157201323556196022393859", 
-        "n": "109454571331697278617670725030735128146004546811402412653072203207726079563233", 
         "x": "82638672503301278923015998535776227331280144783487139112686874194432446389503", 
-        "y": "1552671424198497714718784107399515005192265875137412881512858658676288763"
+        "y": "1552671424198497714718784107399515005192265875137412881512858658676288763",
+        "n": "109454571331697278617670725030735128146004546811402412653072203207726079563233", 
+        "h": "1"
       }, 
       "hex": {
+        "p": "f1fd178c0b3ad58f10126de8ce42435b3961adbcabc8ca6de8fcf353d86e9c03", 
         "a": "f1fd178c0b3ad58f10126de8ce42435b3961adbcabc8ca6de8fcf353d86e9c00", 
         "b": "ee353fca5428a9300d4aba754a44c00fdfec0c9ae4b1a1803075ed967b7bb73f", 
-        "h": "1", 
-        "p": "f1fd178c0b3ad58f10126de8ce42435b3961adbcabc8ca6de8fcf353d86e9c03", 
-        "n": "f1fd178c0b3ad58f10126de8ce42435b53dc67e140d2bf941ffdd459c6d655e1", 
-        "s": "", 
         "x": "b6b3d4c356c139eb31183d4749d423958c27d2dcaf98b70164c97a2dd98f5cff", 
-        "y": "6142e0f7c8b204911f9271f0f3ecef8c2701c307e8e4C9e183115a1554062cfb"
+        "y": "6142e0f7c8b204911f9271f0f3ecef8c2701c307e8e4C9e183115a1554062cfb",
+        "n": "f1fd178c0b3ad58f10126de8ce42435b53dc67e140d2bf941ffdd459c6d655e1", 
+        "h": "01"
       }
     },
     "defined": {
@@ -3638,8 +3737,9 @@
         "hex": {}
       }
     }
-  }, 
+  },
   "id-GostR3410-2001-CryptoPro-A-ParamSet": {
+    "name": "id-GostR3410-2001-CryptoPro-A-ParamSet",
     "alias": [ "gost2001-CryptoProA" ], 
     "bitsize": "256", 
     "field": "prime", 
@@ -3678,6 +3778,7 @@
     }
   },
   "id-GostR3410-2001-CryptoPro-B-ParamSet": {
+    "name": "id-GostR3410-2001-CryptoPro-B-ParamSet",
     "oid": "1.2.643.2.2.35.2", 
     "alias": [ "gost2001-CryptoProB" ], 
     "bitsize": "256", 
@@ -3716,6 +3817,7 @@
     }
   },
   "id-GostR3410-2001-CryptoPro-C-ParamSet": {
+    "name": "id-GostR3410-2001-CryptoPro-C-ParamSet",
     "oid": "1.2.643.2.2.35.3", 
     "alias": [ "gost2001-CryptoProC" ], 
     "bitsize": "256", 
@@ -3754,6 +3856,7 @@
     }
   },
   "id-GostR3410-2001-ParamSet-cc": {
+    "name": "id-GostR3410-2001-ParamSet-cc",
     "alias": [ "gost2001-CryptoProCC" ], 
     "bitsize": null, 
     "field": "prime", 
@@ -3776,6 +3879,7 @@
     }
   },
   "id-GostR3410-2001-TestParamSet": {
+    "name": "id-GostR3410-2001-TestParamSet",
     "alias": [ "gost2001-CryptoProTest" ], 
     "bitsize": "256", 
     "field": "prime", 
@@ -3814,6 +3918,7 @@
     }
   },
   "id-GostR3410-2001-CryptoPro-XchA-ParamSet": {
+    "name": "id-GostR3410-2001-CryptoPro-XchA-ParamSet",
     "oid": "1.2.643.2.2.36.0", 
     "alias": [ "gost2001-CryptoProXchA" ], 
     "bitsize": "256", 
@@ -3852,6 +3957,7 @@
     }
   },
   "id-GostR3410-2001-CryptoPro-XchB-ParamSet": {
+    "name": "id-GostR3410-2001-CryptoPro-XchB-ParamSet",
     "oid": "1.2.643.2.2.36.1", 
     "alias": [ "gost2001-CryptoProXchB" ], 
     "bitsize": "256", 
@@ -3890,6 +3996,7 @@
     }
   },
   "id-tc26-gost-3410-12-512-paramSetA": {
+    "name": "id-tc26-gost-3410-12-512-paramSetA",
     "oid": "1.2.643.7.1.2.1.2.1", 
     "alias": [ "gost2012-512a" ], 
     "bitsize": "512", 
@@ -3928,6 +4035,7 @@
     }
   },
   "id-tc26-gost-3410-12-512-paramSetB": {
+    "name": "id-tc26-gost-3410-12-512-paramSetB",
     "oid": "1.2.643.7.1.2.1.2.2", 
     "alias": [ "gost2012-512b" ], 
     "bitsize": "512", 
@@ -3966,6 +4074,7 @@
     }
   },
   "id-tc26-gost-3410-12-512-paramSetTest": {
+    "name": "id-tc26-gost-3410-12-512-paramSetTest",
     "oid": "1.2.643.7.1.2.1.2.0", 
     "alias": [ "gost2012-512test" ], 
     "bitsize": null, 
@@ -4004,9 +4113,11 @@
     }
   },
   "gost2001-CryptoProTest": {
+    "name": "gost2001-CryptoProTest",
     "ref": "id-GostR3410-2001-TestParamSet"
   },
   "gost2001-CryptoProA": {
+    "name": "gost2001-CryptoProA",
     "ref": "id-GostR3410-2001-CryptoPro-A-ParamSet",
     "defined": {
       "org": "GOST",
@@ -4014,30 +4125,39 @@
     }
   },
   "gost2001-CryptoProB": {
+    "name": "gost2001-CryptoProB",
     "ref": "id-GostR3410-2001-CryptoPro-B-ParamSet"
   },
   "gost2001-CryptoProC": {
+    "name": "gost2001-CryptoProC",
     "ref": "id-GostR3410-2001-CryptoPro-C-ParamSet"
   },
   "gost2001-CryptoProCC": {
+    "name": "gost2001-CryptoProCC",
     "ref": "id-GostR3410-2001-ParamSet-cc"  
   },
   "gost2001-CryptoProXchA": {
+    "name": "gost2001-CryptoProXchA",
     "ref": "id-GostR3410-2001-CryptoPro-XchA-ParamSet" 
   },
   "gost2001-CryptoProXchB": {
+    "name": "gost2001-CryptoProXchB",
     "ref": "id-GostR3410-2001-CryptoPro-XchB-ParamSet"
   },
   "gost2012-512test": {
+    "name": "gost2012-512test",
     "ref": "id-tc26-gost-3410-12-512-paramSetTest"
   },
   "gost2012-512a": {
+    "name": "gost2012-512a",
     "ref": "id-tc26-gost-3410-12-512-paramSetA"
   },
   "gost2012-512b": {
+    "name": "gost2012-512b",
     "ref": "id-tc26-gost-3410-12-512-paramSetB"
   },
   "prime192v1": {
+    "name": "prime192v1",
     "ref": "P-192",
      "defined": {
       "org": "ANSI",
@@ -4045,6 +4165,7 @@
     }
   },
   "prime192v2": {
+    "name": "prime192v2",
     "oid": "1.2.840.10045.3.1.2", 
     "alias": null, 
     "bitsize": "192", 
@@ -4126,6 +4247,7 @@
     }
   }, 
   "prime192v3": {
+    "name": "prime192v3",
     "oid": "1.2.840.10045.3.1.3", 
     "alias": null, 
     "bitsize": "192", 
@@ -4207,6 +4329,7 @@
     }
   }, 
   "prime239v1": {
+    "name": "prime239v1",
     "oid": "1.2.840.10045.3.1.4", 
     "alias": null, 
     "bitsize": "239", 
@@ -4288,6 +4411,7 @@
     }
   },
   "prime239v2": {
+    "name": "prime239v2",
     "oid": "1.2.840.10045.3.1.5", 
     "alias": null, 
     "bitsize": "239", 
@@ -4369,6 +4493,7 @@
     }
   }, 
   "prime239v3": {
+    "name": "prime239v3",
     "oid": "1.2.840.10045.3.1.6", 
     "alias": null, 
     "bitsize": "239", 
@@ -4450,6 +4575,7 @@
     }
   }, 
   "prime256v1": {
+    "name": "prime256v1",
     "oid": "1.2.840.10045.3.1.1.7",
     "ref": "P-256",
     "defined": {
@@ -4458,6 +4584,7 @@
     }
   },
   "sm2p256v1": {
+    "name": "sm2p256v1",
     "oid": "1.2.156.10197.1.301", 
     "alias": null, 
     "bitsize": "256", 
@@ -4538,6 +4665,7 @@
     }
   },
   "wapip192v1": {
+    "name": "wapip192v1",
     "oid": "1.2.156.10197.1.301.101", 
     "alias": null, 
     "bitsize": "192", 
@@ -4618,6 +4746,7 @@
     }
   },
   "wap-wsg-idm-ecid-wtls1": {
+    "name": "wap-wsg-idm-ecid-wtls1",
     "alias": null, 
     "bitsize": "113", 
     "field": "trinomial", 
@@ -4653,6 +4782,7 @@
     }
   },
   "wap-wsg-idm-ecid-wtls3": {
+    "name": "wap-wsg-idm-ecid-wtls3",
     "oid": "2.23.43.1.4.3", 
     "ref": "K-163",
     "defined": {
@@ -4661,6 +4791,7 @@
     }
   },
   "wap-wsg-idm-ecid-wtls4": {
+    "name": "wap-wsg-idm-ecid-wtls4",
     "oid": "2.23.43.1.4.4",
     "ref": "sect113r1",
     "defined": {
@@ -4669,6 +4800,7 @@
     }
   },
   "wap-wsg-idm-ecid-wtls5": {
+    "name": "wap-wsg-idm-ecid-wtls5",
     "oid": "2.23.43.1.4.5",
     "ref": "c2pnb163v1",
     "defined": {
@@ -4677,6 +4809,7 @@
     }
   },
   "wap-wsg-idm-ecid-wtls6": {
+    "name": "wap-wsg-idm-ecid-wtls6",
     "oid": "2.23.43.1.4.6",
     "ref": "secp112r1", 
     "defined": {
@@ -4685,6 +4818,7 @@
     }
   }, 
   "wap-wsg-idm-ecid-wtls7": {
+    "name": "wap-wsg-idm-ecid-wtls7",
     "oid": "2.23.43.1.4.7",
     "ref": "secp160r1",
     "defined": {
@@ -4693,6 +4827,7 @@
     }
   }, 
   "wap-wsg-idm-ecid-wtls8": {
+    "name": "wap-wsg-idm-ecid-wtls8",
     "alias": null, 
     "bitsize": "112", 
     "field": "prime", 
@@ -4732,6 +4867,7 @@
     }
   }, 
   "wap-wsg-idm-ecid-wtls9": {
+    "name": "wap-wsg-idm-ecid-wtls9",
     "alias": null, 
     "bitsize": "160", 
     "field": "prime", 
@@ -4771,6 +4907,7 @@
     }
   },
   "wap-wsg-idm-ecid-wtls10": {
+    "name": "wap-wsg-idm-ecid-wtls10",
     "oid": "2.23.43.1.4.10", 
     "ref": "K-233",
     "defined": {
@@ -4779,6 +4916,7 @@
     }
   },
   "wap-wsg-idm-ecid-wtls11": {
+    "name": "wap-wsg-idm-ecid-wtls11",
     "oid": "2.23.43.1.4.11", 
     "ref": "B-233",
     "defined": {
@@ -4787,6 +4925,7 @@
     }
   },
   "wap-wsg-idm-ecid-wtls12": {
+    "name": "wap-wsg-idm-ecid-wtls12",
     "oid": "2.23.43.1.4.12", 
     "ref": "P-224",
     "defined": {
@@ -4795,6 +4934,7 @@
     }
   },
   "Curve25519": {
+    "name": "Curve25519",
     "alias": null, 
     "bitsize": "256", 
     "field": "prime", 
@@ -4803,22 +4943,22 @@
     "oid": "1.3.6.1.4.1.11591.7", 
     "params": {
       "dec": {
+        "p": "57896044618658097711785492504343953926634992332820282019728792003956564819949", 
         "a": "00000000000000000000000000000000000000000000000000000000000000000000000486662", 
         "b": "00000000000000000000000000000000000000000000000000000000000000000000000000001", 
-        "h": "8", 
-        "p": "57896044618658097711785492504343953926634992332820282019728792003956564819949", 
-        "n": "07237005577332262213973186563042994240857116359379907606001950938285454250989", 
         "x": "00000000000000000000000000000000000000000000000000000000000000000000000000009", 
-        "y": "14781619447589544791020593568409986887264606134616475288964881837755586237401"
+        "y": "14781619447589544791020593568409986887264606134616475288964881837755586237401",
+        "n": "07237005577332262213973186563042994240857116359379907606001950938285454250989", 
+        "h": "8"
       }, 
       "hex": {
+        "p": "7fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffed", 
         "a": "0000000000000000000000000000000000000000000000000000000000076d06", 
         "b": "0000000000000000000000000000000000000000000000000000000000000001", 
-        "h": "8", 
-        "p": "7fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffed", 
-        "n": "1000000000000000000000000000000014def9dea2f79cd65812631a5cf5d3ed", 
         "x": "0000000000000000000000000000000000000000000000000000000000000009", 
-        "y": "20ae19a1b8a086b4e01edd2c7748d14c923d4d7e6d7c61b229e9c5a27eced3d9"
+        "y": "20ae19a1b8a086b4e01edd2c7748d14c923d4d7e6d7c61b229e9c5a27eced3d9",
+        "n": "1000000000000000000000000000000014def9dea2f79cd65812631a5cf5d3ed", 
+        "h": "08"
       }
     },
     "defined": {
