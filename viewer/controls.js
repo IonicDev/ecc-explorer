@@ -29,16 +29,20 @@ var main = function ( crvData, stdData ) {
 
 //-- 'curves' tab events --//
 
-  // Set initial states
-  $('#alias').text( "Select a curve on the left to begin." );
 
-  // Render list of curves on the left selection bar
+  // render list of curves on the left selection bar
   var curveRows = [];
   $.each( crvData, function (i) {
-    curveRows.push([i]);
+    curveRows.push( [i] );    
   } );
+  curveRows.sort();
 
-  // load the 'curves-table'
+  // populate 'curve-select' select menu
+  $.each( curveRows, function (i,e) {
+    $("#curve-select").append( $("<option />").val(e).text(e) );
+  } );
+    
+  // load the 'curves-table' dataTable
   var curvesDataTable = $('#curves-table').DataTable( {
     data: curveRows,
     columns: [ { title: 'Curve Name' } ],
@@ -54,22 +58,148 @@ var main = function ( crvData, stdData ) {
     $($.fn.dataTable.tables(true)).DataTable().columns.adjust();
   } );
 
+  // curves select input navigation
+  $('#curve-select').on('change', function ( ) {
+    var curveName = $(this).val();
+    if ( crvData[ curveName ].ref != undefined ) {
+      curveName = crvData[ curveName ].ref;
+    }
+    var curve = crvData[ curveName ];
+    updateCurveInfo( curve );
+  } );    
+    
   // curves dataTable navigation
-  $('#curves-table tbody').on('click','tr', function ( ) {
+  $('#curves-table tbody').on('click','tr', function ( ) {      
+    var curveName = $(this).children('td:first').text();
+    if ( crvData[ curveName ].ref != undefined ) {
+      curveName = crvData[ curveName ].ref;
+    }
+    var curve = crvData[ curveName ];
+    updateCurveInfo( curve );
+    $('#curve-select').val( curveName );
+  } );
+
+  // hex-dec toggle event
+  $('#hex-toggle').on('click', function() {
+    if( $(this).hasClass('btn-white') ) {
+      $('code[data-type="num"]').toggleClass('d-none');
+        
+      // change parameters for binary fields
+      if ( $('#prime-field').hasClass( 'd-none' ) ) {
+        $('#f-param,#m-param,#k-param,#a-param,#b-param,#x-param,#y-param').toggleClass('d-none');
+      }
+
+      $('#hex-toggle').removeClass('btn-white').addClass('btn-primary');
+      $('#dec-toggle').removeClass('btn-primary').addClass('btn-white');
+    }
+  } );
+  $('#dec-toggle').on('click', function() {
+    if( $(this).hasClass('btn-white') ) {
+      $('code[data-type="num"]').toggleClass('d-none');
+        
+      // change parameters for binary fields
+      if ( $('#prime-field').hasClass( 'd-none' ) ) {
+        $('#f-param,#m-param,#k-param,#a-param,#b-param,#x-param,#y-param').toggleClass('d-none');
+      }
+
+      $('#hex-toggle').removeClass('btn-primary').addClass('btn-white');
+      $('#dec-toggle').removeClass('btn-white').addClass('btn-primary');
+    }
+  } );
+
+
+//-- 'standards' tab events --//
+  var orgRows = [];
+  $.each( stdData, function (i,e) {
+    var region, type, abbr;
+    switch (e.org.region) {
+        case "USA":
+            region = '<span class="d-inline-block" data-toggle="tooltip" title="USA">🇺🇸</span>';
+            break;
+        case "France":
+            region = '<span class="d-inline-block" data-toggle="tooltip" title="France">🇫🇷</span>';
+            break;
+        case "Germany":
+            region = '<span class="d-inline-block" data-toggle="tooltip" title="Germany">🇩🇪</span>';
+            break;
+        case "China":
+            region = '<span class="d-inline-block" data-toggle="tooltip" title="China">🇨🇳</span>';
+            break;
+        case "Russia":
+            region = '<span class="d-inline-block" data-toggle="tooltip" title="Russia">🇷🇺</span>';
+            break;
+        case "International":
+            region = '<span class="d-inline-block" data-toggle="tooltip" title="International">🌐</span>';
+            break;
+        default:
+            region = "";
+            break;
+    }
+    switch (e.org.type) {
+        case "Government":
+            type = '<span class="d-inline-block" data-toggle="tooltip" title="Government">🏛</span>';
+            break;
+        case "Industry":
+            type = '<span class="d-inline-block" data-toggle="tooltip" title="Industry">🏢</span>';
+            break;
+        case "Academia":
+            type = '<span class="d-inline-block" data-toggle="tooltip" title="Academia">🏫</span>';
+            break;
+        default:
+            type = "";
+            break;
+    }
+    abbr = '<a href="#" data-toggle="tooltip" title="' + e.org.name + '">' + e.org.abbr + '</a>';
+
+    orgRows.push( [region,type,abbr] );
+
+    $("#standard-select").append( 
+      $("<option />").val(e.org.abbr).text(e.org.abbr + " -- " + e.org.name) 
+    );
+  } );
+    
+  var orgDataTable = $('#org-table').DataTable( {
+    data: orgRows,
+    columns: [ 
+      { title: 'Region' },
+      { title: 'Type' },
+      { title: 'Name' }
+    ],
+    scrollY: "90vh",
+    scrollCollapse: true,
+    paging: false,
+    searching: false,
+    info: false,
+    order: [[2,'asc']]
+  } );
+
+  // standards select input navigation
+  $('#standard-select').on('change', function ( ) {
+    var thisOrg = $(this).val();
+    updateStandardInfo( stdData[ thisOrg ] );
+  } );
+    
+  // standards dataTable navigation
+  $('#org-table tbody').on('click','tr', function ( ) {
+    var thisOrg = $(this).children('td:last').text();
+    updateStandardInfo( stdData[ thisOrg ] );
+    $('#standard-select').val( thisOrg );
+  } );
+
+}
+
+// populate organization and standards info for the selected standard
+function updateCurveInfo ( curve ) {
 
     $('#curve-intro').addClass("d-none");
     $('#curve-description').removeClass("d-none");
       
-    var curveName = $(this).children('td:first').text();      
-    if ( crvData[ curveName ].ref != undefined ) {
-      curveName = crvData[ curveName ].ref;
-    }
-
-    var curve = crvData[ curveName ],
+    var name = curve.name,
         oid = curve.oid,
         field = curve.field,
         form = curve.form,
         stdDefinedIn = "";
+    
     if (typeof curve.defined !== 'object') {
       //TODO: Improve checking to ensure array of objects
       console.error("Curve standard not defined as expected:", curve.standard);
@@ -78,7 +208,7 @@ var main = function ( crvData, stdData ) {
     }
 
     // curve description variables
-    $('#curve-name').text( curveName );
+    $('#curve-name').text( name );
     $('#oid').html( '(<a href="http://oid-info.com/get/' + oid + '" target="_blank">' + oid + '</a>)' );      
     if( curve.alias != null ) {
       $('#alias').text( curve.alias.join(', ') );
@@ -192,142 +322,44 @@ var main = function ( crvData, stdData ) {
 
     $('#curves-table tbody tr').removeClass("table-active");
     $(this).addClass("table-active");
+}
 
+// populate organization and standards info for the selected standard
+function updateStandardInfo ( std ) {
+  $('#standard-intro').addClass("d-none");
+  $('#standard-description').removeClass("d-none");
+    
+  if ( std.org.hasOwnProperty( "alt" ) ) {
+    var thisName = '<a href="' + std.org.site + '" target="_blank">' + std.org.alt + '</a><br>(' + std.org.name + ')';
+  }
+  else {
+    var thisName = '<a href="' + std.org.site + '" target="_blank">' + std.org.name + '</a>';
+  }
+
+  $('#org-title').text( std.org.abbr );
+  $('#org-name').html( thisName );
+  $('#org-type').text( std.org.type );
+  $('#org-region').text( std.org.region );
+  $('#org-logo').attr( "src", std.org.logo );
+    
+  var stdRows = [];
+  $.each( std.standards, function (i,e) { 
+    stdRows.push( [ 
+      '<a href="' + e.site + '" target="_blank">' + e.abbr + '</a>', 
+      '<a href="' + e.file + '" target="_blank">' + e.name + '</a>',
+      e.year, 
+      e.status.state 
+    ] );
   } );
-
-  // hex-dec toggle event
-  $('#hex-toggle').on('click', function() {
-    if( $(this).hasClass('btn-white') ) {
-      $('code[data-type="num"]').toggleClass('d-none');
-        
-      // change parameters for binary fields
-      if ( $('#prime-field').hasClass( 'd-none' ) ) {
-        $('#f-param,#m-param,#k-param,#a-param,#b-param,#x-param,#y-param').toggleClass('d-none');
-      }
-
-      $('#hex-toggle').removeClass('btn-white').addClass('btn-primary');
-      $('#dec-toggle').removeClass('btn-primary').addClass('btn-white');
-    }
-  } );
-  $('#dec-toggle').on('click', function() {
-    if( $(this).hasClass('btn-white') ) {
-      $('code[data-type="num"]').toggleClass('d-none');
-        
-      // change parameters for binary fields
-      if ( $('#prime-field').hasClass( 'd-none' ) ) {
-        $('#f-param,#m-param,#k-param,#a-param,#b-param,#x-param,#y-param').toggleClass('d-none');
-      }
-
-      $('#hex-toggle').removeClass('btn-primary').addClass('btn-white');
-      $('#dec-toggle').removeClass('btn-white').addClass('btn-primary');
-    }
-  } );
-
-
-//-- 'standards' tab events --//
-  var orgRows = [];
-  $.each( stdData, function (i,e) {
-    var region, type, abbr;
-    switch (e.org.region) {
-        case "USA":
-            region = '<span class="d-inline-block" data-toggle="tooltip" title="USA">🇺🇸</span>';
-            break;
-        case "France":
-            region = '<span class="d-inline-block" data-toggle="tooltip" title="France">🇫🇷</span>';
-            break;
-        case "Germany":
-            region = '<span class="d-inline-block" data-toggle="tooltip" title="Germany">🇩🇪</span>';
-            break;
-        case "China":
-            region = '<span class="d-inline-block" data-toggle="tooltip" title="China">🇨🇳</span>';
-            break;
-        case "Russia":
-            region = '<span class="d-inline-block" data-toggle="tooltip" title="Russia">🇷🇺</span>';
-            break;
-        case "International":
-            region = '<span class="d-inline-block" data-toggle="tooltip" title="International">🌐</span>';
-            break;
-        default:
-            region = "";
-            break;
-    }
-    switch (e.org.type) {
-        case "Government":
-            type = '<span class="d-inline-block" data-toggle="tooltip" title="Government">🏛</span>';
-            break;
-        case "Industry":
-            type = '<span class="d-inline-block" data-toggle="tooltip" title="Industry">🏢</span>';
-            break;
-        case "Academia":
-            type = '<span class="d-inline-block" data-toggle="tooltip" title="Academia">🏫</span>';
-            break;
-        default:
-            type = "";
-            break;
-    }
-    abbr = '<a href="#" data-toggle="tooltip" title="' + e.org.name + '">' + e.org.abbr + '</a>';
-
-    orgRows.push( [region,type,abbr] );
-  } );
-
-  var orgDataTable = $('#org-table').DataTable( {
-    data: orgRows,
-    columns: [ 
-      { title: 'Region' },
-      { title: 'Type' },
-      { title: 'Name' }
-    ],
-    scrollY: "90vh",
+      
+  var stdDocsDataTable = $('#standards-table').DataTable( {
+    destroy: true,
+    data: stdRows,
+    scrollY: '80vh',
     scrollCollapse: true,
     paging: false,
     searching: false,
     info: false,
-    order: [[2,'asc']]
+    order: [[2,'dec']]
   } );
-    
-  // standards dataTable navigation
-  $('#org-table tbody').on('click','tr', function ( ) {
-
-    $('#standard-intro').addClass("d-none");
-    $('#standard-description').removeClass("d-none");
-      
-    var thisOrg = $(this).children('td:last').text(),
-        std = stdData[ thisOrg ];
-    
-    if ( std.org.hasOwnProperty( "alt" ) ) {
-      var thisName = '<a href="' + std.org.site + '" target="_blank">' + std.org.alt + '</a><br>(' + std.org.name + ')';
-    }
-    else {
-      var thisName = '<a href="' + std.org.site + '" target="_blank">' + std.org.name + '</a>';
-    }
-
-    $('#org-title').text( std.org.abbr );
-    $('#org-name').html( thisName );
-    $('#org-type').text( std.org.type );
-    $('#org-region').text( std.org.region );
-    $('#org-logo').attr( "src", std.org.logo );
-    
-    var stdRows = [];
-    $.each( std.standards, function (i,e) { 
-      stdRows.push( [ 
-        '<a href="' + e.site + '" target="_blank">' + e.abbr + '</a>', 
-        '<a href="' + e.file + '" target="_blank">' + e.name + '</a>', 
-        e.year, 
-        e.status.state 
-      ] );
-    } );
-      
-    var stdDocsDataTable = $('#standards-table').DataTable( {
-      destroy: true,
-      data: stdRows,
-      scrollY: '80vh',
-      scrollCollapse: true,
-      paging: false,
-      searching: false,
-      info: false,
-      order: [[2,'dec']]
-    } );
-
-  } );
-
 }
